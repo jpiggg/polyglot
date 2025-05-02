@@ -1,4 +1,5 @@
 import * as React from 'react';
+import useEventBus from '../../hooks/useEventBus';
 import { EVENTS } from '../../../constants';
 import type { IProps as IViewProps } from './view';
 import type { IGameState, IUser, ITimer } from '../../../types';
@@ -12,17 +13,13 @@ import {
 	updateWords,
 } from '../../reducers';
 
-export interface IProps {
-	eventBus: any;
-}
-
-function Model(View: React.ComponentType<Omit<IViewProps, 'classes'>>): React.ComponentType<IProps> {
+function Model(View: React.ComponentType<Omit<IViewProps, 'classes'>>): React.ComponentType<{}> {
 	// @todo: подключить шину событий в контроллере
-	function GameModel({ eventBus }: IProps) {
+	function GameModel() {
 		const [user, setUser] = React.useState<IUser | null>(null);
-		const [gameId, updateGameid] = React.useState<string>();
 		const [fieldLetters, updateFieldLetters] = React.useState<string[]>([]);
 		const [gameState, updateGameState] = React.useState<IGameState | null>(null);
+		const eventBus = useEventBus();
 		const dispatch = useAppDispatch();
 
 		React.useEffect(() => {
@@ -38,8 +35,6 @@ function Model(View: React.ComponentType<Omit<IViewProps, 'classes'>>): React.Co
 			if (data.game.turn?.droppedLetters && data.game.turn?.droppedLetters.length) {
 				updateFieldLetters(data.game.turn.droppedLetters);
 			}
-
-			updateGameid(data.gameId);
 
 			dispatch(updateLetters({ ...data.game.letters }));
 			dispatch(updateActivePlayer(data.game.activePlayer));
@@ -134,7 +129,7 @@ function Model(View: React.ComponentType<Omit<IViewProps, 'classes'>>): React.Co
 		};
 
 		const onChangeLetters = (selectedLetters: string[]) => {
-			eventBus.emit(EVENTS.CHANGE_LETTERS, {letters: selectedLetters});
+			eventBus.emit(EVENTS.CHANGE_LETTERS, { letters: selectedLetters });
 		};
 
 		if (!user) {
