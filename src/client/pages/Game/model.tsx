@@ -14,7 +14,6 @@ import {
 } from '../../reducers';
 
 function Model(View: React.ComponentType<Omit<IViewProps, 'classes'>>): React.ComponentType<{}> {
-	// @todo: подключить шину событий в контроллере
 	function GameModel() {
 		const [user, setUser] = React.useState<IUser | null>(null);
 		const [fieldLetters, updateFieldLetters] = React.useState<string[]>([]);
