@@ -13,18 +13,21 @@ export class EventBus {
 	private sessionId?: string;
 	private connected: boolean = false;
 
-	private initSessionId() {
-		this.sessionId = undefined;
+private initSessionId() {
+    this.sessionId = undefined;
 
-		let sessionId = window.localStorage.getItem('sessionId');
+    let sessionId: string | undefined;
 
-		if (!sessionId) {
-			sessionId = uuid4();
-			window.localStorage.setItem('sessionId', sessionId);
-		}
+    if (typeof window !== 'undefined' && window.localStorage) {
+        sessionId = window.localStorage.getItem('sessionId') || uuid4();
+        window.localStorage.setItem('sessionId', sessionId);
+    } else {
+        // Fallback for non-browser environments
+        sessionId = uuid4();
+    }
 
-		return sessionId;
-	}
+    return sessionId;
+}
 
 	public connect() {
 		this.sessionId = this.initSessionId();

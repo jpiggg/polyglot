@@ -1,11 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { gameReducer } from './reducers';
+import createStore from '../store/getState'
 
-const store = configureStore({
-  reducer: {
-    game: gameReducer,
-  },
-})
+const store = createStore((window as any).__PRELOADED_STATE__);
+
+delete (window as any).__PRELOADED_STATE__;
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>
