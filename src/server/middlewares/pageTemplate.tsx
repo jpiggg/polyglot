@@ -20,7 +20,7 @@ const template = ({ title, app, scripts, styles }: any, { state }: any) => `
 		: ''}
 	</head>
 	<body>
-		<div id="app">${app}</div>
+		<div id="app" style="height: 100%;">${app}</div>
 		        <script>
           // WARNING: See the following for security issues around embedding JSON in HTML:
           // https://redux.js.org/usage/server-rendering#security-considerations
@@ -42,7 +42,7 @@ export default function middlewareServerSideRender(_req: Request, res: Response)
 		</Provider>
 	);
 
-	const state = store.getState()
+	const state = res.locals.pageState || store.getState();
 
 	const html = template({
 		title: res.locals.title,

@@ -40,6 +40,16 @@
 	}
 }
 
-.inputLabel {
+.label {
 	padding: 0 var(--padding-horizontal-text-field);
+	text-align: left;
+	@include font($variant: 'label');
+
+	&.disabled {
+		color: var(--color-grey-500);
+	}
+
+	&.invalid {
+		color: var(--color-red-600);
+	}
 }
