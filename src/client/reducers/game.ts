@@ -1,14 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { IGameState, Letters, ITimer, IPlayer, UserId, Field, IWord } from '../../types';
+import initialState from '../../store/initialState';
 import { deepClone } from '../helpers/object';
-
-const initialState: IGameState | Record<string, any> = {
-    timer: {
-        time: 120,
-        total: 120
-    },
-    players: {}
-};
 
 export const gameSlice = createSlice({
     name: 'game',

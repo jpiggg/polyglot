@@ -25,6 +25,11 @@ function Model(View: React.ComponentType<Omit<IViewProps, 'classes'>>): React.Co
 			setUser({ id: '7301cf16-5e08-4019-bf84-734d3d73f7bd', name: 'jpig' });
 		}, []);
 
+		const onGameCreated = (payload: any) => {
+			const { gameId } = JSON.parse(payload);
+			location.href = `/game/${gameId}`;
+		}
+
 		const loadGame = (payload: any) => {
 			const data: { game: IGameState; gameId: string } = JSON.parse(payload);
 
@@ -59,7 +64,7 @@ function Model(View: React.ComponentType<Omit<IViewProps, 'classes'>>): React.Co
 			),
 		);
 
-		eventBus.on(EVENTS.CREATE_GAME, React.useCallback(loadGame, [dispatch]));
+		eventBus.on(EVENTS.CREATE_GAME, React.useCallback(onGameCreated, [dispatch]));
 
 		eventBus.on(EVENTS.GAME_SESSION_RECONNECT, React.useCallback(loadGame, [dispatch]));
 
