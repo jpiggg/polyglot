@@ -43,8 +43,8 @@ function InputView({
 				[classes.disabled]: disabled,
 				[classes.invalid]: invalid,
 			})}>
-				{label}
-			</label>
+					{label}
+				</label>
 			)}
 			<div
 				className={clsx(classes.inputWrapper, {
@@ -62,7 +62,7 @@ function InputView({
 					onChange={onChange}
 					className={clsx(classes.input)}
 					placeholder={placeholder}
-					value={value || defaultValue}
+					value={value}
 					{...rest}
 				/>
 				{Icon && <img src={Icon} alt="search" className={classes.icon} />}
@@ -73,8 +73,8 @@ function InputView({
 				[classes.invalid]: invalid,
 			})}>
 
-				{hint}
-			</div>
+					{hint}
+				</div>
 			)}
 		</div>
 	);
