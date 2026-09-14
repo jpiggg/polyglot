@@ -57,6 +57,7 @@ export interface IGame {
 	canJoin: (max_players: number) => boolean;
 	getPlayers: () => Array<string>;
 	join: (sessionId: string, player: ISpectator | IPlayer, pwd?: string) => void;
+	reconnect: () => void;
 	getState: () => IState;
 	sessions: string[];
 	addLetter: (payload: IAddLetter) => void;
@@ -75,13 +76,14 @@ export class GameEngine implements IGame {
 	private dictionary: IDictionary;
 	public sessions: string[];
 	private previousWords: IWord[] = [];
+	private turnField: Field;
 
 	constructor(eventBus: EventBus, settings: IGameSettings, user: IUser, dictionary: IDictionary, sessionId: string) {
 		const timer = new Timer(settings.timer || DEFAULT_TIMER_VALUE_SEC, this.onTimerTick, this.onTimerEnd);
 		const lettersService = new LettersService(letterConfig);
 		const initialWord = dictionary.getInitialWord();
-		const field = generateFieldSchema();
 		const initialField = generateFieldSchema();
+		const field = structuredClone(initialField);
 
 		this.state = {
 			activePlayer: user.id,
@@ -106,6 +108,7 @@ export class GameEngine implements IGame {
 		};
 
 		const letters = this.placeWordOnTheField(initialWord, lettersService.getLetters());
+		this.turnField = structuredClone(this.state.field);
 
 		this.state.letters = letters;
 		this.sessions = [sessionId];
@@ -126,13 +129,6 @@ export class GameEngine implements IGame {
 	public getPlayers() {
 		return Object.keys(this.state.players);
 	}
-
-	// @TODO: todo!()
-
-	// private nextTurn = () => {
-	// 	// перед следующим ходом сделать this._initialField = null для каждой буквы выложенного слова
-	// 	// это нужно, поскольку каждый бонус можно использовать только единажды
-	// }
 
 	private handleWords = () => {
 		const data = this.generateWords();
@@ -204,9 +200,9 @@ export class GameEngine implements IGame {
 	private generateWords = () => {
 		const data: IWords = this.state.turn!.droppedLetters.reduce((acc, droppedLetterId) => {
 			const position = { y: 0, x: 0 };
-			for (let i = 0; i < this.state.field.length; i++) {
-				for (let j = 0; j < this.state.field[i].length; j++) {
-					if (this.state.field[i][j] === droppedLetterId) {
+			for (let i = 0; i < this.turnField.length; i++) {
+				for (let j = 0; j < this.turnField[i].length; j++) {
+					if (this.turnField[i][j] === droppedLetterId) {
 						position.y = i;
 						position.x = j;
 						break;
@@ -235,7 +231,7 @@ export class GameEngine implements IGame {
 		let response: IWords = {};
 
 		if (!Object.keys(verticalWord).length && !Object.keys(horizontalWord).length) {
-			// слово из одной буквы
+			// one letter word
 			const wordId = [letterId].join(';');
 
 			response[wordId] = {
@@ -259,7 +255,7 @@ export class GameEngine implements IGame {
 	private makeWord = (letterId: string, startPosition: { x: number; y: number }, axis: 'y' | 'x') => {
 		const letters = [letterId];
 		const topLimit = 0;
-		const bottomLimit = this.state.field.length - 1;
+		const bottomLimit = this.turnField.length - 1;
 		let wordStartPosition = `${startPosition.y};${startPosition.x}`;
 		let up = startPosition[axis] > topLimit;
 
@@ -270,7 +266,7 @@ export class GameEngine implements IGame {
 			if (up) {
 				--position[axis];
 
-				const data = this.state.field[position.y][position.x];
+				const data = this.turnField[position.y][position.x];
 				const isLetter = data && !isNaN(Number(data));
 
 				if (!isLetter) {
@@ -289,7 +285,7 @@ export class GameEngine implements IGame {
 
 			++position[axis];
 
-			const data = this.state.field[position.y][position.x];
+			const data = this.turnField[position.y][position.x];
 			const isLetter = data && !isNaN(Number(data));
 
 			if (!isLetter) {
@@ -365,7 +361,7 @@ export class GameEngine implements IGame {
 	public addLetter(payload: IAddLetter) {
 		const { position, letterId } = payload;
 
-		this.state.field[position.y][position.x] = letterId;
+		this.turnField[position.y][position.x] = letterId;
 
 		this.state.turn?.droppedLetters.push(letterId);
 
@@ -375,7 +371,7 @@ export class GameEngine implements IGame {
 			dropppedLetters: this.state.turn?.droppedLetters,
 			sessions: this.sessions,
 		});
-		this.eventBus.emit(EVENTS.UPDATE_TURN_FIELD, { field: this.state.field, sessions: this.sessions });
+		this.eventBus.emit(EVENTS.UPDATE_TURN_FIELD, { field: this.turnField, sessions: this.sessions });
 	}
 
 	public removeLetter({ letterId }: IRemoveLetter) {
@@ -385,10 +381,10 @@ export class GameEngine implements IGame {
 			this.state.turn?.droppedLetters.splice(droppedLetter, 1);
 		}
 
-		this.state.field.forEach((row, rowIndex) => {
+		this.turnField.forEach((row, rowIndex) => {
 			row.forEach((cellContent, cellIndex) => {
 				if (cellContent === letterId) {
-					this.state.field[rowIndex][cellIndex] = generateFieldSchema()[rowIndex][cellIndex];
+					this.turnField[rowIndex][cellIndex] = generateFieldSchema()[rowIndex][cellIndex];
 				}
 			});
 		});
@@ -399,7 +395,7 @@ export class GameEngine implements IGame {
 			dropppedLetters: this.state.turn?.droppedLetters,
 			sessions: this.sessions,
 		});
-		this.eventBus.emit(EVENTS.UPDATE_TURN_FIELD, { field: this.state.field, sessions: this.sessions });
+		this.eventBus.emit(EVENTS.UPDATE_TURN_FIELD, { field: this.turnField, sessions: this.sessions });
 	}
 
 	private placeWordOnTheField(word: string, letters: Letters) {
@@ -444,6 +440,13 @@ export class GameEngine implements IGame {
 		return newLetters;
 	}
 
+	private clearTurnState = () => {
+		this.state.turn = {
+			droppedLetters: [],
+			words: [],
+		};
+	}
+
 	public changeLetters(letters: string[]) {
 		const playerLetters = this.state.players[this.state.activePlayer].letters;
 		const newLetters = this.letters.getRandomLetters(letters.length);
@@ -479,18 +482,23 @@ export class GameEngine implements IGame {
 		}
 
 		// just in case clear all current's turn data
-		this.state.turn = {
-			droppedLetters: [],
-			words: [],
-		};
+		this.clearTurnState();
 
 		this.eventBus.emit(EVENTS.UPDATE_LETTERS, { letters: this.state.letters, sessions: this.sessions });
 
 		// force new turn
+		this.forceNextTurn();
+	}
+
+	private forceNextTurn = () => {
+		// Clear all field letters that were put during the current turn
+		this.turnField = structuredClone(this.state.field);
 		this.nextTurn();
 	}
 
 	public nextTurn() {
+		this.state.field = structuredClone(this.turnField); // does it have invalid words? if yes, then we need to reset the field to the previous state
+
 		const playerLetters = this.state.players[this.state.activePlayer].letters;
 		const letters =
 			this.state.turn?.droppedLetters && this.letters.getRandomLetters(this.state.turn?.droppedLetters.length);
@@ -530,6 +538,7 @@ export class GameEngine implements IGame {
 
 		this.timer.stop();
 
+		// maybe need to emit UPDATE TURN FIELD?
 		this.eventBus.emit(EVENTS.UPDATE_PLAYERS, { players: this.state.players, sessions: this.sessions });
 		this.eventBus.emit(EVENTS.UPDATE_LETTERS, { letters: this.state.letters, sessions: this.sessions });
 		this.eventBus.emit(EVENTS.UPDATE_TURN_LETTERS, {
@@ -574,8 +583,13 @@ export class GameEngine implements IGame {
 
 		this.eventBus.emit(EVENTS.UPDATE_LETTERS, { letters: this.state.letters, sessions: this.sessions });
 
-		this.nextTurn();
+		this.forceNextTurn();
 	};
+
+	public reconnect() {
+		this.turnField = structuredClone(this.state.field);
+		this.clearTurnState();
+	}
 
 	public getState() {
 		return this.state;

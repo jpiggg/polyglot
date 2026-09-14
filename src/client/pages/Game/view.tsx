@@ -83,7 +83,7 @@ function GamePage({ game, fieldLetters, onCreateGame, userId, classes, onAddLett
 			<div className={classes.container}>
 				<Button className={classes.item} onClick={onCreateGame}>New game</Button>
 				<span className={classes.item}>OR</span>
-				<Input className={classes.item} label='Join game' defaultValue='Type game id here' onChange={onJoinGame} />
+				<Input className={classes.item} label='Join game' placeholder='Type game id here' onChange={onJoinGame} />
 			</div>
 		);
 	}

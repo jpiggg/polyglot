@@ -59,6 +59,7 @@ io.on('connection', (ws: Socket) => {
 	const sessionId = ws.handshake.headers['x-session-id']
 
 	gameSessions[sessionId as string] = ws;
+	controller.onGameSessionReconnect(sessionId as string);
 	const gameData = controller.getGameState(sessionId as string);
 
 	if (Object.keys(gameData).length) {

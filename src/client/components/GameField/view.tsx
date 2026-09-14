@@ -20,14 +20,8 @@ export interface IEncapsulatedProps extends IConnectedProps {
 	classes: Record<string, string>;
 }
 
-function FieldView({ classes, fieldLetters, field, words }: IEncapsulatedProps) {
-	const renderLetter = (letterId: string) => {
-		if (fieldLetters.includes(letterId)) {
-			return null;
-		}
-
-		return <Letter key={h32(letterId, 0xabcd).toString()} letterId={letterId} />;
-	};
+function FieldView({ classes, field, words }: IEncapsulatedProps) {
+	const renderLetter = (letterId: string) => <Letter key={h32(letterId, 0xabcd).toString()} letterId={letterId} />;
 
 	const wordsList = words?.reduce((acc, word) => {
 		acc.push(<WordHighlight key={h32(word.letterIds.join(','), 0xabcd).toString()} {...word} />);
@@ -45,13 +39,12 @@ function FieldView({ classes, fieldLetters, field, words }: IEncapsulatedProps) 
 							y: index,
 						};
 
-						const isLetterId = value && !isNaN(Number(value));
-						const isDisabledCell = !!(isLetterId && fieldLetters.includes(value));
+						const isLetterId: boolean = !!(value && !isNaN(Number(value)));
 
 						return (
 							<DroppableCell
 								id={id}
-								disabled={isDisabledCell}
+								disabled={isLetterId}
 								position={position}
 								key={h32(`${(value && !isLetterId ? value : '') + id}dr-cell`, 0xabcd).toString()}
 								bonus={value && !isLetterId ? value : null}

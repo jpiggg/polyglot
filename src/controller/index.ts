@@ -88,23 +88,43 @@ export class Controller {
 		this.eventBus = eventBus;
 	}
 
-	public getGameState = (sessionId: SessionId) => {
-		const res: any = {};
-
-		Object.keys(this.games).forEach(gameId => {
+	private getGameBySessionId(sessionId: SessionId): { gameId: GameId | undefined; game: IGame | undefined } {
+		const res: any = {
+			gameId: undefined,
+			game: undefined,
+		};
+		for (const gameId of Object.keys(this.games)) {
 			const gameInstance = this.games[gameId].instance;
 			const { sessions } = gameInstance;
 
-			const activeSession = sessions.indexOf(sessionId);
-
-			if (activeSession !== -1) {
-				const gameState = gameInstance.getState();
+			if (sessions.includes(sessionId)) {
 				res.gameId = gameId;
-				res.game = gameState;
+				res.game = gameInstance;
+				return res;
 			}
-		});
+		}
 
 		return res;
+	}
+
+	public onGameSessionReconnect = (sessionId: SessionId) => {
+		const { game } = this.getGameBySessionId(sessionId);
+
+		game?.reconnect();
+
+	}
+
+	public getGameState = (sessionId: SessionId) => {
+		const { gameId, game } = this.getGameBySessionId(sessionId);
+
+		if (gameId && game) {
+			return {
+				gameId,
+				game: game.getState(),
+			};
+		} 
+			return {};
+		
 	};
 
 	public onCreateGame = async (payload: ICreateGamePayload) => {
