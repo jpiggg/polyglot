@@ -18,9 +18,4 @@ function NoSSR({ children, fallback = null }: IProps) {
 	return <>{children}</>;
 }
 
-NoSSR.defaultProps = {
-	fallback: null,
-	children: 'Empty',
-};
-
 export default NoSSR;

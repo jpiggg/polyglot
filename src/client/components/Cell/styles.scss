@@ -1,66 +1,66 @@
 @use '../../theme' as *;
 
 .cell {
-    position: relative;
-    background-color: var(--color-white);
-    width: 40px;
-    height: 40px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
+	position: relative;
+	background-color: var(--color-white);
+	width: 40px;
+	height: 40px;
+	border-radius: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1;
 }
 
 .cell.w3 {
-    background-color: var(--color-pink);
+	background-color: var(--color-pink);
 }
 .cell.w2 {
-    background-color: var(--color-azure);
+	background-color: var(--color-azure);
 }
 .cell.l3 {
-    background-color: var(--color-beige);
+	background-color: var(--color-beige);
 }
 .cell.l2 {
-    background-color: var(--color-mint);
+	background-color: var(--color-mint);
 }
 
-.cell.w2  > .bonusContainer,
-.cell.w3  > .bonusContainer {
-    letter-spacing: 2.16px; 
+.cell.w2 > .bonusContainer,
+.cell.w3 > .bonusContainer {
+	letter-spacing: 2.16px;
 }
 
-.cell.l2  > .bonusContainer,
-.cell.l3  > .bonusContainer {
-    letter-spacing: .6px; 
+.cell.l2 > .bonusContainer,
+.cell.l3 > .bonusContainer {
+	letter-spacing: 0.6px;
 }
 
 .cell.w3 > .bonusContainer {
-    color: var(--color-dusty-pink);
+	color: var(--color-dusty-pink);
 }
 .cell.w2 > .bonusContainer {
-    color: var(--color-dusty-azure);
+	color: var(--color-dusty-azure);
 }
 .cell.l3 > .bonusContainer {
-    color: var(--color-dusty-beige);
+	color: var(--color-dusty-beige);
 }
 .cell.l2 > .bonusContainer {
-    color: var(--color-dusty-mint);
+	color: var(--color-dusty-mint);
 }
 
 .bonusContainer {
-    display: block;
-    text-align: center;
+	display: block;
+	text-align: center;
 }
-.bonusContainer>span {
-    text-transform: uppercase;
-    display: block;
+.bonusContainer > span {
+	text-transform: uppercase;
+	display: block;
 }
-.bonusContainer>span:nth-child(1) {
-    @include font($variant: 'bonus');
-    font-style: normal;
+.bonusContainer > span:nth-child(1) {
+	@include font($variant: 'bonus');
+	font-style: normal;
 }
-.bonusContainer>span:nth-child(2) {
-    margin-top: 2px;
-    @include font($variant: 'bonus-price');
+.bonusContainer > span:nth-child(2) {
+	margin-top: 2px;
+	@include font($variant: 'bonus-price');
 }

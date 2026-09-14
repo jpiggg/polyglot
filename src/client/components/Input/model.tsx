@@ -13,18 +13,12 @@ function Model(View: React.ComponentType<IProps>): React.ComponentType<IProps> {
 			props.onChange?.(value);
 		};
 
-		return <View {...props} value={value} onChange={onInputChange} />;
-	}
+		const onInutSubmit = () => {
+			props.onSubmit?.(value);
+		};
 
-	InputModel.defaultProps = {
-		disabled: false,
-		invalid: false,
-		placeholder: '',
-		defaultValue: '',
-		className: '',
-		label: '',
-		hint: '',
-	};
+		return <View {...props} value={value} onChange={onInputChange} onSubmit={onInutSubmit} />;
+	}
 
 	return InputModel;
 }

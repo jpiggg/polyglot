@@ -8,14 +8,13 @@ export interface IProps {
 }
 
 function Model(View: React.ComponentType<IProps>): React.ComponentType<IProps> {
-	function ButtonModel({ children, ...rest }: IProps) {
-		return <View {...rest}>{children}</View>;
+	function ButtonModel({ children, disabled = false, className = '', ...rest }: IProps) {
+		return (
+			<View {...rest} disabled={disabled} className={className}>
+				{children}
+			</View>
+		);
 	}
-
-	ButtonModel.defaultProps = {
-		disabled: false,
-		className: '',
-	};
 
 	return ButtonModel;
 }

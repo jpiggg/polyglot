@@ -1,24 +1,24 @@
 @use '../../theme' as *;
 
 .container {
-    display: block;
-    @include font($variant: 'timers');
+	display: block;
+	@include font($variant: 'timers');
 }
 
 .icon {
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    margin-right: 20px;
-    color: currentColor;
-    vertical-align: bottom;
+	width: 24px;
+	height: 24px;
+	display: inline-block;
+	margin-right: 20px;
+	color: currentColor;
+	vertical-align: bottom;
 }
 
 .highlighted {
-    @include font($variant: 'timers', $font-weight: 600);
-    color: var(--color-black);
+	@include font($variant: 'timers', $font-weight: 600);
+	color: var(--color-black);
 }
 
 .threshold {
-    color: var(--color-red-600);
+	color: var(--color-red-600);
 }

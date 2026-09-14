@@ -9,8 +9,8 @@ async function run() {
     await cp.exec('husky install');
 
     if (fs.existsSync(path.resolve(process.cwd(), './.husky'))) return;
-    await cp.exec('npx husky add .husky/pre-commit "npm run lint"');
-    await cp.exec('npx husky add .husky/pre-push "npm run lint:deep"');
+    await cp.exec('pnpm exec husky add .husky/pre-commit "pnpm run lint"');
+    await cp.exec('pnpm exec husky add .husky/pre-push "pnpm run lint:deep"');
 }
 
 run()

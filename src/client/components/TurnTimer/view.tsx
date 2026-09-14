@@ -39,8 +39,4 @@ function TimerView({ classes, remainSeconds, initialSeconds, threshold = 30 }: I
 	);
 }
 
-TimerView.defaultProps = {
-	threshold: 30,
-};
-
 export default TimerView;

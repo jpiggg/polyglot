@@ -9,6 +9,7 @@ import WordHighlight from '../WordHighlight';
 
 export interface IProps {
 	fieldLetters: string[];
+	isLocked?: boolean;
 }
 
 export interface IConnectedProps extends IProps {
@@ -20,7 +21,7 @@ export interface IEncapsulatedProps extends IConnectedProps {
 	classes: Record<string, string>;
 }
 
-function FieldView({ classes, field, words }: IEncapsulatedProps) {
+function FieldView({ classes, field, words, isLocked = false }: IEncapsulatedProps) {
 	const renderLetter = (letterId: string) => <Letter key={h32(letterId, 0xabcd).toString()} letterId={letterId} />;
 
 	const wordsList = words?.reduce((acc, word) => {
@@ -44,7 +45,7 @@ function FieldView({ classes, field, words }: IEncapsulatedProps) {
 						return (
 							<DroppableCell
 								id={id}
-								disabled={isLetterId}
+								disabled={isLetterId || isLocked}
 								position={position}
 								key={h32(`${(value && !isLetterId ? value : '') + id}dr-cell`, 0xabcd).toString()}
 								bonus={value && !isLetterId ? value : null}

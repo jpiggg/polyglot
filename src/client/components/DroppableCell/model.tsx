@@ -14,26 +14,17 @@ export interface IProps {
 function Model(
 	View: React.ForwardRefExoticComponent<React.PropsWithoutRef<ICellProps & IProps> & React.RefAttributes<unknown>>,
 ): React.ComponentType<ICellProps & IProps> {
-	function DroppableCellModel(props: ICellProps & IProps) {
+	function DroppableCellModel({ disabled = false, id = '', ...props }: ICellProps & IProps) {
 		const { setNodeRef } = useDroppable({
-			id: props.id || '',
-			disabled: props.disabled,
+			id,
+			disabled,
 			data: {
 				position: props.position,
 			},
 		});
 
-		const newProps = { ...props };
-		delete newProps.id;
-		delete newProps.disabled;
-
-		return <View ref={setNodeRef} {...newProps} />;
+		return <View ref={setNodeRef} {...props} />;
 	}
-
-	DroppableCellModel.defaultProps = {
-		disabled: false,
-		id: '',
-	};
 
 	return DroppableCellModel;
 }

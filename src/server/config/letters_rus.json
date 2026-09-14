@@ -1,167 +1,167 @@
 [
-    {
-        "name": "А",
-        "count": 10,
-        "price": 1
-    },
-    {
-        "name": "Б",
-        "count": 3,
-        "price": 3
-    },
-    {
-        "name": "В",
-        "count": 5,
-        "price": 2
-    },
-    {
-        "name": "Г",
-        "count": 3,
-        "price": 3
-    },
-    {
-        "name": "Д",
-        "count": 5,
-        "price": 2
-    },
-    {
-        "name": "Е",
-        "count": 9,
-        "price": 1
-    },
-    {
-        "name": "Ё",
-        "count": 1,
-        "price": 5
-    },
-    {
-        "name": "Ж",
-        "count": 2,
-        "price": 5
-    },
-    {
-        "name": "З",
-        "count": 2,
-        "price": 5
-    },
-    {
-        "name": "И",
-        "count": 8,
-        "price": 1
-    },
-    {
-        "name": "Й",
-        "count": 4,
-        "price": 2
-    },
-    {
-        "name": "К",
-        "count": 6,
-        "price": 2
-    },
-    {
-        "name": "Л",
-        "count": 4,
-        "price": 2
-    },
-    {
-        "name": "М",
-        "count": 5,
-        "price": 2
-    },
-    {
-        "name": "Н",
-        "count": 8,
-        "price": 1
-    },
-    {
-        "name": "О",
-        "count": 10,
-        "price": 1
-    },
-    {
-        "name": "П",
-        "count": 6,
-        "price": 2
-    },
-    {
-        "name": "Р",
-        "count": 6,
-        "price": 2
-    },
-    {
-        "name": "С",
-        "count": 6,
-        "price": 2
-    },
-    {
-        "name": "Т",
-        "count": 5,
-        "price": 2
-    },
-    {
-        "name": "У",
-        "count": 3,
-        "price": 3
-    },
-    {
-        "name": "Ф",
-        "count": 1,
-        "price": 10
-    },
-    {
-        "name": "Х",
-        "count": 2,
-        "price": 5
-    },
-    {
-        "name": "Ц",
-        "count": 1,
-        "price": 10
-    },
-    {
-        "name": "Ч",
-        "count": 2,
-        "price": 5
-    },
-    {
-        "name": "Ш",
-        "count": 1,
-        "price": 10
-    },
-    {
-        "name": "Щ",
-        "count": 1,
-        "price": 10
-    },
-    {
-        "name": "Ъ",
-        "count": 1,
-        "price": 10
-    },
-    {
-        "name": "Ы",
-        "count": 2,
-        "price": 10
-    },
-    {
-        "name": "Ь",
-        "count": 2,
-        "price": 5
-    },
-    {
-        "name": "Э",
-        "count": 1,
-        "price": 10
-    },
-    {
-        "name": "Ю",
-        "count": 1,
-        "price": 10
-    },
-    {
-        "name": "Я",
-        "count": 3,
-        "price": 3
-    }
+	{
+		"name": "А",
+		"count": 10,
+		"price": 1
+	},
+	{
+		"name": "Б",
+		"count": 3,
+		"price": 3
+	},
+	{
+		"name": "В",
+		"count": 5,
+		"price": 2
+	},
+	{
+		"name": "Г",
+		"count": 3,
+		"price": 3
+	},
+	{
+		"name": "Д",
+		"count": 5,
+		"price": 2
+	},
+	{
+		"name": "Е",
+		"count": 9,
+		"price": 1
+	},
+	{
+		"name": "Ё",
+		"count": 1,
+		"price": 5
+	},
+	{
+		"name": "Ж",
+		"count": 2,
+		"price": 5
+	},
+	{
+		"name": "З",
+		"count": 2,
+		"price": 5
+	},
+	{
+		"name": "И",
+		"count": 8,
+		"price": 1
+	},
+	{
+		"name": "Й",
+		"count": 4,
+		"price": 2
+	},
+	{
+		"name": "К",
+		"count": 6,
+		"price": 2
+	},
+	{
+		"name": "Л",
+		"count": 4,
+		"price": 2
+	},
+	{
+		"name": "М",
+		"count": 5,
+		"price": 2
+	},
+	{
+		"name": "Н",
+		"count": 8,
+		"price": 1
+	},
+	{
+		"name": "О",
+		"count": 10,
+		"price": 1
+	},
+	{
+		"name": "П",
+		"count": 6,
+		"price": 2
+	},
+	{
+		"name": "Р",
+		"count": 6,
+		"price": 2
+	},
+	{
+		"name": "С",
+		"count": 6,
+		"price": 2
+	},
+	{
+		"name": "Т",
+		"count": 5,
+		"price": 2
+	},
+	{
+		"name": "У",
+		"count": 3,
+		"price": 3
+	},
+	{
+		"name": "Ф",
+		"count": 1,
+		"price": 10
+	},
+	{
+		"name": "Х",
+		"count": 2,
+		"price": 5
+	},
+	{
+		"name": "Ц",
+		"count": 1,
+		"price": 10
+	},
+	{
+		"name": "Ч",
+		"count": 2,
+		"price": 5
+	},
+	{
+		"name": "Ш",
+		"count": 1,
+		"price": 10
+	},
+	{
+		"name": "Щ",
+		"count": 1,
+		"price": 10
+	},
+	{
+		"name": "Ъ",
+		"count": 1,
+		"price": 10
+	},
+	{
+		"name": "Ы",
+		"count": 2,
+		"price": 10
+	},
+	{
+		"name": "Ь",
+		"count": 2,
+		"price": 5
+	},
+	{
+		"name": "Э",
+		"count": 1,
+		"price": 10
+	},
+	{
+		"name": "Ю",
+		"count": 1,
+		"price": 10
+	},
+	{
+		"name": "Я",
+		"count": 3,
+		"price": 3
+	}
 ]

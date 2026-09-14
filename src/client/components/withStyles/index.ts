@@ -20,13 +20,14 @@ export type IOuterComponent<P, R> = React.ForwardRefExoticComponent<IComponentPr
 function withStyles<P = {}, R = unknown>(
 	Component: IInnerComponent<P, R>,
 	styles: Record<string, string>,
-	opts: IWithStylesOptions = { withMergeClasses: false }
+	opts: IWithStylesOptions = { withMergeClasses: false },
 ): IOuterComponent<P, R> {
 	const styled = React.forwardRef<R, P & Partial<IWithStylesProps>>(
-		(props: P & Partial<IWithStylesProps>, ref: React.ForwardedRef<R>) => React.createElement(Component, {
+		(props: P & Partial<IWithStylesProps>, ref: React.ForwardedRef<R>) =>
+			React.createElement(Component, {
 				...props,
 				ref,
-				classes: deepMerge(styles, props.classes ?? {}),
+				classes: opts.withMergeClasses ? deepMerge(styles, props.classes ?? {}) : styles,
 			}),
 	);
 

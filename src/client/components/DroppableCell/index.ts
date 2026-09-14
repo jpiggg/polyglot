@@ -8,8 +8,4 @@ const DroppableCell = Model(React.forwardRef<unknown, ICellProps & IProps>(View)
 
 DroppableCell.displayName = 'DroppableCell';
 
-DroppableCell.defaultProps = {
-    disabled: false
-};
-
 export default DroppableCell;

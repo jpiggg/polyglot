@@ -1,18 +1,18 @@
 @use '../../theme' as *;
 .container {
-    display: flex;
-    background-color: var(--color-grey-300);
-    border: 1px solid var(--color-grey-400);
-    border-radius: 11px;
-    max-width: 632px;
-    box-sizing: border-box;
+	display: flex;
+	background-color: var(--color-grey-300);
+	border: 1px solid var(--color-grey-400);
+	border-radius: 11px;
+	max-width: 632px;
+	box-sizing: border-box;
 }
 .field {
-    width: 614px;
-    justify-content: center;
-    display: flex;
-    margin: 8px;
-    flex-wrap: wrap;
-    gap: 1px;
-    position: relative;
+	width: 614px;
+	justify-content: center;
+	display: flex;
+	margin: 8px;
+	flex-wrap: wrap;
+	gap: 1px;
+	position: relative;
 }

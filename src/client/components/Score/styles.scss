@@ -1,21 +1,27 @@
 .container {
-    margin: 40px 0;
+	margin: 40px 0;
 }
 .row {
-    display: flex;
-    margin-top: 10px;
+	display: flex;
+	margin-top: 10px;
 }
 
 .dotted {
-    width: 100%;
-    height: 1px;
-    align-content: center;
-    align-self: center;
-    margin: 0 10px;
-    border-top: 1px dotted;
+	width: 100%;
+	height: 1px;
+	align-content: center;
+	align-self: center;
+	margin: 0 10px;
+	border-top: 1px dotted;
 }
 .item {
-    color: black;
+	color: black;
+}
+
+.user {
+	color: black;
+	width: 100%;
+	max-width: fit-content;
 }
 
 .active {

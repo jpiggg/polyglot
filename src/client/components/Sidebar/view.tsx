@@ -22,7 +22,14 @@ export interface IEncapsulatedProps extends IProps {
 	classes: Record<string, string>;
 }
 
-function SidebarView({ classes, activePlayer, players, words, onNextTurn, onChangeLetters }: IEncapsulatedProps) {
+function SidebarView({
+	classes,
+	activePlayer = undefined,
+	players,
+	words,
+	onNextTurn,
+	onChangeLetters,
+}: IEncapsulatedProps) {
 	const renderActivePlayerLabel = () => {
 		if (!activePlayer) {
 			return null;
@@ -66,8 +73,4 @@ function SidebarView({ classes, activePlayer, players, words, onNextTurn, onChan
 }
 
 SidebarView.displayName = 'SidebarView';
-SidebarView.defaultProps = {
-	activePlayer: undefined,
-};
-
 export default SidebarView;

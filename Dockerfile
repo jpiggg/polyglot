@@ -1,4 +1,4 @@
-FROM node:20-alpine as builder
+FROM node:24-alpine as builder
 
 ARG PORT=8080
 ARG HOST='0.0.0.0'
@@ -9,20 +9,19 @@ ENV HOST=$HOST \
 	LANG=en_US.UTF-8 \
 	TZ=UTC \
 	NO_UPDATE_NOTIFIER=true \
-	NPM_CONFIG_USERCONFIG=/tmp/.npmrc \
-	NPM_CONFIG_CACHE=/tmp/npm-cache \
-	NPM_CONFIG_PREFIX=/tmp/npm-global
+	COREPACK_HOME=/tmp/corepack
 
 RUN mkdir -p /usr/share/app \
 	&& chown 1001:0 /usr/share/app \
-	&& mkdir -p /tmp/npm-cache \
-	&& mkdir -p /tmp/npm-global
+	&& mkdir -p /tmp/corepack
 
 WORKDIR /usr/share/app
 
-COPY package-lock.json .
+RUN corepack enable && corepack install --global pnpm@10.15.1
+
+COPY pnpm-lock.yaml .
 COPY package.json .
-RUN npm ci --no-audit --no-fund
+RUN pnpm install --frozen-lockfile --ignore-scripts
 COPY bin ./bin
 COPY config ./config
 COPY static ./static
@@ -34,7 +33,7 @@ ENV NODE_ENV $NODE_ENV
 RUN sh ./bin/build.sh
 
 
-FROM node:20-alpine as runner
+FROM node:24-alpine as runner
 
 ARG PORT=8080
 ARG HOST='0.0.0.0'

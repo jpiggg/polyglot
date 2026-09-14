@@ -107,4 +107,7 @@ module.exports = {
 
 	// https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/destructuring-assignment.md
 	'react/destructuring-assignment': 'off',
+
+	// React function components should use parameter defaults instead of defaultProps.
+	'react/require-default-props': ['error', { functions: 'defaultArguments' }],
 };

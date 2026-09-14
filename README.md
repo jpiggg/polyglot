@@ -1,35 +1,60 @@
-# Modern and Minimal Frontend Boilerplate
+# Erudit
 
-This repository contains a Docker image that includes all the necessary dependencies to run a minimal Node.js server using TypeScript and Webpack bundling. With this image, you can easily build and run a server on any machine that has Docker installed. Using TypeScript and Webpack bundling ensures that your server will be efficient and reliable, while also making it easy to manage your codebase.
+This repository contains a TypeScript React client and Node.js server bundled with Rsbuild.
 
 ## Technologies
-- **Client-side:** TypeScript v4
-- **Server-side:** TypeScript v4, Node.js v18, Express v4
+- **Client-side:** React and TypeScript
+- **Server-side:** Node.js 24 and Express
+- **Build tooling:** Rsbuild, pnpm, and Prettier
 
-## Limitations and restrictions
+## Requirements
 
-**Server-side:**
-- Node.js v.18
-- Npm v.9
-- TLS/SSL is not supported, instead it should be implemented by platform router or reverse-proxy
+Use Node 24 through nvm and pnpm 10:
 
-**Client-side:**
-- IE browser is not supported
+```sh
+nvm use
+corepack enable
+pnpm install
+```
 
-## How to build
+TLS/SSL is not supported directly; terminate TLS at a platform router or reverse proxy.
+
+## Commands
+
+Install dependencies:
+```sh
+pnpm install
+```
+
 Production build:
 ```sh
-$ npm run build
+pnpm run build
 ```
 
-Development build:
+Development mode starts the Rsbuild client server with HMR and the Node server concurrently. The server is built once and is not reloaded, so in-memory game sessions remain available:
 ```sh
-$ npm run dev:build
+pnpm run dev
 ```
 
-Start server:
+Start the production server:
 ```sh
-$ npm start
-# or
-$ ./bin/start.sh
+pnpm start
+```
+
+Run formatting and checks:
+```sh
+pnpm run format
+pnpm run format:check
+pnpm run lint
+pnpm test
+```
+
+The application server listens on port `8080` and Socket.IO listens on port `8090`.
+
+The client production artifacts are emitted under `dist/client`, including `manifest.json`; the server bundle is `dist/server/index.js`.
+
+Docker:
+```sh
+docker build . -t boilerplate-react-typescript-nodejs
+docker run --name boilerplate-react-typescript-nodejs --rm -p 8080:8080 -it boilerplate-react-typescript-nodejs
 ```

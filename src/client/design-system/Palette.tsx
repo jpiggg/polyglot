@@ -1,7 +1,6 @@
 import * as React from 'react';
 import clsx from 'clsx';
-// eslint-disable-next-line import/no-webpack-loader-syntax
-import rawColors from '!../theme/palette.scss?raw';
+import rawColors from '../theme/palette.scss?raw';
 import styles from './Palette.scss';
 
 const rawList = rawColors

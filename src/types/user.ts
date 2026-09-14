@@ -1,24 +1,21 @@
-import type { LetterId } from './index';
-
 export type UserId = string;
 
 export interface IRroles {
-    PARTICIPANT: 'PARTICIPANT',
-    SPECTATOR: 'SPECTATOR'
+	PARTICIPANT: 'PARTICIPANT';
+	SPECTATOR: 'SPECTATOR';
 }
 
 export interface IPlayer extends IUser {
-    role: IRroles["PARTICIPANT"];
-    secret?: string;
-    score: number;
-    letters: LetterId[];
-};
+	role: IRroles['PARTICIPANT'];
+	secret?: string;
+	score: number;
+}
 
 export interface ISpectator extends IUser {
-    role: IRroles["SPECTATOR"];
+	role: IRroles['SPECTATOR'];
 }
 
 export interface IUser {
-    id: UserId;
-    name: string;
-};
+	id: UserId;
+	name: string;
+}

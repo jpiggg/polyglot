@@ -133,6 +133,8 @@ $score-size: 10px;
 .score {
 	position: absolute;
 	color: var(--color-white);
-	font: 400 8px/10px Arial, sans-serif;
+	font:
+		400 8px/10px Arial,
+		sans-serif;
 	text-align: center;
 }

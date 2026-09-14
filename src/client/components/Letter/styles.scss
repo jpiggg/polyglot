@@ -1,41 +1,41 @@
 @use '../../theme' as *;
 
 .letter {
-    position: absolute;
-    z-index: 2;
-    border: 3px solid transparent;
-    background-clip: padding-box;
-    border-radius: 5px;
-    text-align: center;
-    display: flex;
-    flex: 0 1 auto;
-    align-items: center;
-    width: 34px;
-    height: 34px;
-    background-color: var(--color-white);
-    color: var(--color-black);
+	position: absolute;
+	z-index: 2;
+	border: 3px solid transparent;
+	background-clip: padding-box;
+	border-radius: 5px;
+	text-align: center;
+	display: flex;
+	flex: 0 1 auto;
+	align-items: center;
+	width: 34px;
+	height: 34px;
+	background-color: var(--color-white);
+	color: var(--color-black);
 }
 
 .selected {
-    border-color: var(--color-blue-500);
+	border-color: var(--color-blue-500);
 }
 
 .price {
-    @include font($variant: 'prices');
-    padding: 2px 2px 2px 0;
+	@include font($variant: 'prices');
+	padding: 2px 2px 2px 0;
 }
 
 .priceOverlay {
-    background-color: rgba(255, 255, 255, .6);
-    display: flex;
-    position: absolute;
-    border-radius: 3px;
-    top: 0;
-    right: 0;
+	background-color: rgba(255, 255, 255, 0.6);
+	display: flex;
+	position: absolute;
+	border-radius: 3px;
+	top: 0;
+	right: 0;
 }
 
 .value {
-    @include font($variant: 'letters');
-    text-align: center;
-    width: 100%;
+	@include font($variant: 'letters');
+	text-align: center;
+	width: 100%;
 }

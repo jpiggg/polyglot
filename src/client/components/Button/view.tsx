@@ -9,17 +9,17 @@ export interface IProps {
 	disabled?: boolean;
 }
 
-function ButtonView({ classes, children, className, ...rest }: IProps) {
+function ButtonView({ classes, children, className = '', disabled = false, ...rest }: IProps) {
 	return (
-		<button type="button" className={clsx(classes.button, className, 'default-focusable')} {...rest}>
+		<button
+			type="button"
+			className={clsx(classes.button, className, 'default-focusable')}
+			disabled={disabled}
+			{...rest}
+		>
 			{children}
 		</button>
 	);
 }
-
-ButtonView.defaultProps = {
-	disabled: false,
-	className: '',
-};
 
 export default ButtonView;
