@@ -1,7 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
 import uuid4 from 'uuid4';
-import Label from '../Label/index';
 
 export interface IProps {
 	classes: Record<string, string>;
@@ -12,7 +11,7 @@ export interface IProps {
 	defaultValue?: string;
 	value?: string;
 	Icon?: string | null;
-	type: string;
+	type?: string;
 	onChange: (e: any) => void;
 	label?: string;
 	hint?: string;
@@ -38,10 +37,15 @@ function InputView({
 	const [isFocused, setFocused] = React.useState(false);
 
 	return (
-		<label htmlFor={inputId} className={clsx(classes.wrapper, className)}>
-			<Label className={classes.inputLabel} disabled={disabled}>
+		<div className={clsx(classes.wrapper, className)}>
+			{label && (
+				<label htmlFor={inputId} className={clsx(classes.label, {
+				[classes.disabled]: disabled,
+				[classes.invalid]: invalid,
+			})}>
 				{label}
-			</Label>
+			</label>
+			)}
 			<div
 				className={clsx(classes.inputWrapper, {
 					focused: isFocused,
@@ -63,10 +67,16 @@ function InputView({
 				/>
 				{Icon && <img src={Icon} alt="search" className={classes.icon} />}
 			</div>
-			<Label className={classes.inputLabel} invalid={invalid} disabled={disabled}>
+			{hint && (
+				<div className={clsx(classes.label, {
+				[classes.disabled]: disabled,
+				[classes.invalid]: invalid,
+			})}>
+
 				{hint}
-			</Label>
-		</label>
+			</div>
+			)}
+		</div>
 	);
 }
 

@@ -43,7 +43,6 @@ export interface IGameState {
 	};
 	spectators: IUser[];
 	letters: Letters;
-	id: GameId;
 	words?: IWords;
 	field: Field;
 	timer: ITimer;

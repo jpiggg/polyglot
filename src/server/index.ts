@@ -3,6 +3,7 @@ import Express from 'express';
 import { Server, Socket } from 'socket.io';
 import env from './environment';
 import pageMeta from './middlewares/pageMeta';
+import setGamePageState from './middlewares/gamePageState';
 import pageTemplate from './middlewares/pageTemplate';
 import middlewareHandler404 from './middlewares/handler404';
 import errorRequestHandler from './middlewares/errorRequestHandler';
@@ -24,15 +25,16 @@ app.all("*", (_, res, next) => {
 	next();
 });
 
+app.all('*', pageMeta);
+
 app.disable('x-powered-by');
 app.all('/healthcheck', healthcheck);
 app.use(morgan('tiny'));
 app.use('/dist', Express.static('dist/client'));
-app.all('/', pageMeta);
 app.all('/', pageTemplate);
+app.all('/game/:gameId', setGamePageState(controller));
+app.all('/game/:gameId', pageTemplate);
 app.use('/', Express.static('static'));
-app.all('/:page', pageMeta);
-app.all('/:page', pageTemplate);
 app.all('*', errorRequestHandler);
 app.all('*', middlewareHandler404);
 
@@ -54,11 +56,9 @@ io.use((socket, next) => {
 const gameSessions: Record<string, Socket> = {};
 
 io.on('connection', (ws: Socket) => {
-	const sessionId = ws.handshake.headers['x-session-id'];
-
+	const sessionId = ws.handshake.headers['x-session-id']
 
 	gameSessions[sessionId as string] = ws;
-
 	const gameData = controller.getGameState(sessionId as string);
 
 	if (Object.keys(gameData).length) {

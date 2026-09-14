@@ -11,10 +11,18 @@
 }
 
  // [DEBUG] this is for debug only
-.newGameContainer {
-    width: 100%;
-    height: 100%;
+.container {
+    width: 400px;
+    position: absolute;
+    inset: 0;
+    place-self: center;
+    text-align: center;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.item {
+    width: 100%;
 }

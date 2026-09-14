@@ -6,6 +6,7 @@ import Sidebar from '../../components/Sidebar';
 import GameField from '../../components/GameField';
 import PlayerLetters from '../../components/PlayerLetters';
 import Button from '../../components/Button';
+import Input from '../../components/Input';
 
 
 export interface IProps {
@@ -14,13 +15,14 @@ export interface IProps {
 	userId: UserId;
 	fieldLetters: string[];
 	onNextTurn: () => void;
+	onJoinGame: (gameId: string) => void;
 	onCreateGame: () => void;
 	onAddLetter: (payload: { letterId: string, position: { x: number; y: number }, cellId: UniqueIdentifier }) => void;
 	onRemoveLetter: (payload: { letterId: string }) => void;
 	onChangeLetters: (selectedLetters: string[]) => void;
 }
 
-function GamePage({ game, fieldLetters, onCreateGame, userId, classes, onAddLetter, onRemoveLetter, onNextTurn, onChangeLetters }: IProps) {
+function GamePage({ game, fieldLetters, onCreateGame, userId, classes, onAddLetter, onRemoveLetter, onNextTurn, onChangeLetters, onJoinGame }: IProps) {
 	const [selectedLetters, setSelectedLetters] = React.useState<string[]>([]);
 
 	const mouseSensor = useSensor(MouseSensor, {
@@ -78,8 +80,10 @@ function GamePage({ game, fieldLetters, onCreateGame, userId, classes, onAddLett
 	if (!game) {
 		return (
 			// [DEBUG] this is for debug only
-			<div className={classes.newGameContainer}>
-				<Button onClick={onCreateGame}>New game</Button>
+			<div className={classes.container}>
+				<Button className={classes.item} onClick={onCreateGame}>New game</Button>
+				<span className={classes.item}>OR</span>
+				<Input className={classes.item} label='Join game' defaultValue='Type game id here' onChange={onJoinGame} />
 			</div>
 		);
 	}
