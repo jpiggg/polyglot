@@ -2,7 +2,7 @@ import * as React from 'react';
 import useEventBus from '../../hooks/useEventBus';
 import { EVENTS } from '../../../constants';
 import type { IProps as IViewProps } from './view';
-import type { IGameState, IUser, ITimer } from '../../../types';
+import type { IGameState, ITimer } from '../../../types';
 import { useAppDispatch } from '../../hooks';
 import {
 	updateLetters,
@@ -11,29 +11,26 @@ import {
 	updatePlayers,
 	updateField,
 	updateWords,
+	updateHand,
 } from '../../reducers';
 
 function Model(View: React.ComponentType<Omit<IViewProps, 'classes'>>): React.ComponentType<{}> {
 	function GameModel() {
-		const [user, setUser] = React.useState<IUser | null>(null);
 		const [fieldLetters, updateFieldLetters] = React.useState<string[]>([]);
 		const [gameState, updateGameState] = React.useState<IGameState | null>(null);
+		const [currentUserId, updateCurrentUserId] = React.useState<string>();
 		const eventBus = useEventBus();
 		const dispatch = useAppDispatch();
 
 		React.useEffect(() => {
-			setUser({ id: '7301cf16-5e08-4019-bf84-734d3d73f7bd', name: 'jpig' });
-		}, []);
-
-		const onGameCreated = (payload: any) => {
-			const { gameId } = JSON.parse(payload);
-			location.href = `/game/${gameId}`;
-		}
+			eventBus.emit(EVENTS.REQUEST_GAME_STATE);
+		}, [eventBus]);
 
 		const loadGame = (payload: any) => {
-			const data: { game: IGameState; gameId: string } = JSON.parse(payload);
+			const data: { game: IGameState; gameId: string; hand: any } = JSON.parse(payload);
 
 			updateGameState(() => ({ ...data.game }));
+			updateCurrentUserId((data as { userId?: string }).userId);
 			dispatch(updateField(data.game.field));
 
 			if (data.game.turn?.droppedLetters && data.game.turn?.droppedLetters.length) {
@@ -43,6 +40,7 @@ function Model(View: React.ComponentType<Omit<IViewProps, 'classes'>>): React.Co
 			dispatch(updateLetters({ ...data.game.letters }));
 			dispatch(updateActivePlayer(data.game.activePlayer));
 			dispatch(updatePlayers(data.game.players));
+			dispatch(updateHand(data.hand));
 		};
 
 		eventBus.on(
@@ -64,16 +62,27 @@ function Model(View: React.ComponentType<Omit<IViewProps, 'classes'>>): React.Co
 			),
 		);
 
-		eventBus.on(EVENTS.CREATE_GAME, React.useCallback(onGameCreated, [dispatch]));
-
-		eventBus.on(EVENTS.GAME_SESSION_RECONNECT, React.useCallback(loadGame, [dispatch]));
+		eventBus.on(
+			EVENTS.UPDATE_ACTIVE_PLAYER,
+			React.useCallback(
+				(payload: any) => {
+					dispatch(updateActivePlayer(payload.activePlayer));
+				},
+				[dispatch],
+			),
+		);
 
 		eventBus.on(
-			EVENTS.GET_CURRENT_USER,
-			React.useCallback((payload: IUser) => {
-				setUser(() => payload);
-			}, []),
+			EVENTS.UPDATE_HAND,
+			React.useCallback(
+				(payload: any) => {
+					dispatch(updateHand(payload.hand));
+				},
+				[dispatch],
+			),
 		);
+
+		eventBus.on(EVENTS.GAME_SESSION_RECONNECT, React.useCallback(loadGame, [dispatch]));
 
 		eventBus.on(
 			EVENTS.ON_TIMER_TICK,
@@ -112,15 +121,6 @@ function Model(View: React.ComponentType<Omit<IViewProps, 'classes'>>): React.Co
 			),
 		);
 
-		const onCreateGame = () => {
-			eventBus.emit(EVENTS.CREATE_GAME, {
-				settings: {
-					max_players: 2,
-				},
-				user,
-			});
-		};
-
 		const onAddLetter = (payload: any) => {
 			eventBus.emit(EVENTS.ADD_LETTER, payload);
 		};
@@ -136,16 +136,11 @@ function Model(View: React.ComponentType<Omit<IViewProps, 'classes'>>): React.Co
 			eventBus.emit(EVENTS.CHANGE_LETTERS, { letters: selectedLetters });
 		};
 
-		if (!user) {
-			return null;
-		}
-
 		return (
 			<View
 				game={gameState}
+				currentUserId={currentUserId}
 				fieldLetters={fieldLetters}
-				userId={user!.id}
-				onCreateGame={onCreateGame}
 				onAddLetter={onAddLetter}
 				onRemoveLetter={onRemoveLetter}
 				onNextTurn={onNextTurn}
@@ -155,8 +150,6 @@ function Model(View: React.ComponentType<Omit<IViewProps, 'classes'>>): React.Co
 	}
 
 	GameModel.displayName = 'GameModel';
-	GameModel.defaultProps = {};
-
 	return GameModel;
 }
 

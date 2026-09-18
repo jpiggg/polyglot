@@ -5,23 +5,23 @@ $step: 4px;
 :global {
 	.default-focusable {
 		&:focus {
-			box-shadow: 0 0 0 4px #0075D226;
+			box-shadow: 0 0 0 4px #0075d226;
 			outline: none;
 		}
 	}
 	.default-focusable-invalid {
 		&:focus {
-			box-shadow: 0 0 0 4px #D31D1D26;
+			box-shadow: 0 0 0 4px #d31d1d26;
 		}
 	}
 
 	.focused {
-		box-shadow: 0 0 0 4px #0075D226;
+		box-shadow: 0 0 0 4px #0075d226;
 		outline: none;
 	}
 
 	.invalid {
-		box-shadow: 0 0 0 4px #D31D1D26;
+		box-shadow: 0 0 0 4px #d31d1d26;
 	}
 }
 

@@ -2,40 +2,40 @@
 @use '../theme/palette.scss';
 
 .container {
-    color: var(--color-grey-600);
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 50px;
+	color: var(--color-grey-600);
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 50px;
 }
 
 .group {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .row {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
 }
 
 .name {
-    width: 75px;
-    text-align: right;
-    text-transform: capitalize;
-    padding: 10px 0;
-    font: 12px/12px sans-serif !important;
+	width: 75px;
+	text-align: right;
+	text-transform: capitalize;
+	padding: 10px 0;
+	font: 12px/12px sans-serif !important;
 }
 
 .value {
-    width: 150px;
-    text-align: center;
-    padding: 10px 0;
-    font: 10px/16px monospace !important;
-    color: var(--color-black);
+	width: 150px;
+	text-align: center;
+	padding: 10px 0;
+	font: 10px/16px monospace !important;
+	color: var(--color-black);
 
-    &Highlighted {
-        color: var(--color-white);
-    }
+	&Highlighted {
+		color: var(--color-white);
+	}
 }

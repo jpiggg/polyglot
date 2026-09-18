@@ -1,11 +1,11 @@
 @use '../../theme' as *;
 
 .container {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    background-color: var(--color-grey-400);
-    padding: 10px;
-    border-radius: 10px;
-    color: var(--color-grey-600);
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	background-color: var(--color-grey-400);
+	padding: 10px;
+	border-radius: 10px;
+	color: var(--color-grey-600);
 }

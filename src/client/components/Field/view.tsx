@@ -10,17 +10,13 @@ export interface IEncapsulatedProps extends IProps {
 	classes: Record<string, string>;
 }
 
-function FieldView({ classes, children, className }: IEncapsulatedProps) {
+function FieldView({ classes, children, className = '' }: IEncapsulatedProps) {
 	return (
 		<div className={clsx(classes.container, className)}>
 			<div className={classes.field}>{children}</div>
 		</div>
 	);
 }
-
-FieldView.defaultProps = {
-	className: '',
-};
 
 FieldView.displayName = 'FieldView';
 

@@ -1,52 +1,56 @@
 import type { Socket } from 'socket.io';
 import { EVENTS } from '../constants';
-
+import { setGuestName } from './services/guestSession';
 
 export function connect(controller: any) {
 	return function (socket: Socket, next: () => void) {
-		socket.on(EVENTS.JOIN_GAME, (payload: any) => {
-			controller.onJoin(payload);
-		});
+		const { guestSession } = socket.data;
+		const actor = guestSession.user;
 
 		socket.on(EVENTS.GAME_START, (payload: any) => {
 			controller.onStartGame(payload);
 		});
 
-		socket.on(EVENTS.ON_NEXT_TURN, (payload: any) => {
-			controller.onNextTurn(payload);
-		});
-
 		socket.on(EVENTS.CREATE_GAME, (payload: any) => {
-			const sessionId = socket.handshake.headers['x-session-id'];
+			setGuestName(guestSession, payload.username);
 
-			controller.onCreateGame({...payload, sessionId}).then((data: any) => {
-				socket.emit(EVENTS.CREATE_GAME, JSON.stringify(data));
+			controller.onCreateGame({ ...payload, sessionId: actor.id, user: actor }).then((data: any) => {
+				socket.emit(EVENTS.CREATE_GAME, JSON.stringify({ ...data, userId: actor.id }));
 			});
 		});
 
-		socket.on(EVENTS.ADD_LETTER, (payload) => {
-			const sessionId = socket.handshake.headers['x-session-id'];
+		socket.on(EVENTS.JOIN_GAME, (payload: any) => {
+			setGuestName(guestSession, payload?.username);
+			const data = controller.onJoin({ ...payload, sessionId: actor.id, user: actor });
 
-			controller.onAddLetter(sessionId, payload);
-		});
-		socket.on(EVENTS.REMOVE_LETTER, (payload) => {
-			const sessionId = socket.handshake.headers['x-session-id'];
-
-			controller.onRemoveLetter(sessionId, payload);
+			socket.emit(EVENTS.JOIN_GAME, JSON.stringify({ ...data, userId: actor.id }));
 		});
 
-		socket.on(EVENTS.ON_NEXT_TURN, (payload) => {
-			const sessionId = socket.handshake.headers['x-session-id'];
+		socket.on(EVENTS.REQUEST_GAME_STATE, () => {
+			const sessionId = actor.id;
+			const gameData = controller.getGameState(sessionId as string);
+			const hand = controller.getPlayerHand(gameData.gameId!, sessionId);
 
-			controller.onNextTurn(sessionId, payload);
+			if (Object.keys(gameData).length) {
+				socket.emit(EVENTS.GAME_SESSION_RECONNECT, JSON.stringify({ ...gameData, hand }));
+			}
 		});
 
-		socket.on(EVENTS.CHANGE_LETTERS, (payload) => {
-			const sessionId = socket.handshake.headers['x-session-id'];
+		socket.on(EVENTS.ADD_LETTER, (payload: any) => {
+			controller.onAddLetter(actor.id, payload);
+		});
+		socket.on(EVENTS.REMOVE_LETTER, (payload: any) => {
+			controller.onRemoveLetter(actor.id, payload);
+		});
 
-			controller.onChangeLetters(sessionId, payload);
+		socket.on(EVENTS.ON_NEXT_TURN, (payload: any) => {
+			controller.onNextTurn(actor.id, payload);
+		});
+
+		socket.on(EVENTS.CHANGE_LETTERS, (payload: any) => {
+			controller.onChangeLetters(actor.id, payload);
 		});
 
 		next();
-	}
-};
+	};
+}

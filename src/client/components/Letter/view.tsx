@@ -16,7 +16,7 @@ export interface IProps {
 }
 
 export interface IEncapsulatedProps extends IProps {
-	style?:  Record<string, string |undefined>;
+	style?: Record<string, string | undefined>;
 	position?: Record<string, string | number>;
 	attributes?: DraggableAttributes;
 	listeners?: SyntheticListenerMap | undefined;
@@ -53,7 +53,7 @@ function LetterView(
 			})}
 			{...attributes}
 			{...listeners}
-			style={{...style, ...position}}
+			style={{ ...style, ...position }}
 			{...rest}
 		>
 			<div className={classes.priceOverlay}>

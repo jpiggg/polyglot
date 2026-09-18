@@ -2,6 +2,8 @@ import * as React from 'react';
 import type { DraggableAttributes } from '@dnd-kit/core';
 import { IProps as IViewProps } from './view';
 
+/* eslint-disable react/require-default-props */
+
 export type SyntheticListenerMap = Record<string, Function>;
 
 export interface IProps {
@@ -29,25 +31,46 @@ function Model(
 	React.PropsWithoutRef<IEncapsulatedProps & IProps> & React.RefAttributes<HTMLDivElement>
 > {
 	const LetterModel = React.forwardRef<HTMLDivElement, IEncapsulatedProps & IProps>(
-		({ letter, styles, ...rest }: React.PropsWithoutRef<IProps & IEncapsulatedProps>, ref: any) => {
+		(
+			{
+				letter,
+				isSelected = false,
+				onClick = () => {},
+				onRightClick = () => {},
+				onDoubleClick = () => {},
+				classes = {},
+				style = undefined,
+				position = undefined,
+				styles = undefined,
+				attributes = undefined,
+				listeners = undefined,
+				...rest
+			}: React.PropsWithoutRef<IProps & IEncapsulatedProps>,
+			ref: any,
+		) => {
 			if (!letter) {
 				return null;
 			}
 
-			return <View ref={ref} letter={letter} {...rest} />;
+			return (
+				<View
+					ref={ref}
+					letter={letter}
+					isSelected={isSelected}
+					onClick={onClick}
+					onRightClick={onRightClick}
+					onDoubleClick={onDoubleClick}
+					classes={classes}
+					style={style}
+					position={position}
+					styles={styles}
+					attributes={attributes}
+					listeners={listeners}
+					{...rest}
+				/>
+			);
 		},
 	);
-
-	LetterModel.defaultProps = {
-		isSelected: false,
-		onClick: () => { },
-		onRightClick: () => { },
-		onDoubleClick: () => { },
-		classes: {},
-		style: undefined,
-		attributes: undefined,
-		listeners: undefined,
-	};
 
 	return LetterModel;
 }

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import type { IProps as IViewProps } from './view';
-import type { ITimer } from '../../../types';
 
 export interface IProps {
 	seconds: number;
@@ -9,7 +8,7 @@ export interface IProps {
 }
 
 function Model(View: React.ComponentType<IViewProps>): React.ComponentType<IProps> {
-	function TimerModel({ seconds = 0, remainSeconds = 0, threshold = 30 }: IProps) {
+	function TimerModel({ seconds, remainSeconds, threshold = 30 }: IProps) {
 		const [remainSecondsState, setRemainSecondsState] = React.useState(remainSeconds);
 		const [prevSeconds, setPrevSeconds] = React.useState<null | number>(null);
 		const [prevRemainSeconds, setPrevRemainSeconds] = React.useState<null | number>(null);
@@ -35,10 +34,6 @@ function Model(View: React.ComponentType<IViewProps>): React.ComponentType<IProp
 
 		return <View remainSeconds={remainSecondsState} initialSeconds={seconds} threshold={threshold} />;
 	}
-
-	TimerModel.defaultProps = {
-		threshold: 30,
-	};
 
 	return TimerModel;
 }

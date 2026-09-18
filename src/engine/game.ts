@@ -3,11 +3,11 @@ import { ITimerInstance, Timer } from '../server/services/Timer';
 import type { IDictionary } from '../server/services/dictionary';
 import type {
 	Letters,
+	LetterId,
 	UserId,
 	GameId,
 	Field,
 	IPlayer,
-	ISpectator,
 	IUser,
 	IWord,
 	IWords,
@@ -51,18 +51,19 @@ export interface IState {
 }
 
 export interface IGame {
-	nextTurn: (turn: ITurn, secret: string) => void;
 	start: () => void;
 	eventBus: EventBus;
 	canJoin: (max_players: number) => boolean;
 	getPlayers: () => Array<string>;
-	join: (sessionId: string, player: ISpectator | IPlayer, pwd?: string) => void;
+	join: (sessionId: string, user: IUser) => void;
 	reconnect: () => void;
 	getState: () => IState;
 	sessions: string[];
-	addLetter: (payload: IAddLetter) => void;
-	removeLetter: (payload: IRemoveLetter) => void;
-	changeLetters: (letters: string[]) => void;
+	addLetter: (actorId: UserId, payload: IAddLetter) => void;
+	removeLetter: (actorId: UserId, payload: IRemoveLetter) => void;
+	changeLetters: (actorId: UserId, letters: string[]) => void;
+	nextTurn: (actorId: UserId) => void;
+	getPlayerHand: (userId: UserId) => LetterId[];
 }
 
 export class GameEngine implements IGame {
@@ -77,6 +78,7 @@ export class GameEngine implements IGame {
 	public sessions: string[];
 	private previousWords: IWord[] = [];
 	private turnField: Field;
+	private playersHands: Record<UserId, LetterId[]> = {};
 
 	constructor(eventBus: EventBus, settings: IGameSettings, user: IUser, dictionary: IDictionary, sessionId: string) {
 		const timer = new Timer(settings.timer || DEFAULT_TIMER_VALUE_SEC, this.onTimerTick, this.onTimerEnd);
@@ -85,17 +87,12 @@ export class GameEngine implements IGame {
 		const initialField = generateFieldSchema();
 		const field = structuredClone(initialField);
 
+		this.letters = lettersService;
+
 		this.state = {
 			activePlayer: user.id,
-			players: {
-				[user.id]: {
-					...user,
-					letters: lettersService.getRandomLetters(PLAYER_DEFAULT_LETTERS_COUNT),
-					role: ROLES.PARTICIPANT,
-					score: 0,
-				},
-			},
 			spectators: [],
+			players: {},
 			field,
 			timer: {
 				time: settings.timer,
@@ -107,6 +104,8 @@ export class GameEngine implements IGame {
 			},
 		};
 
+		this.createPlayer(user);
+
 		const letters = this.placeWordOnTheField(initialWord, lettersService.getLetters());
 		this.turnField = structuredClone(this.state.field);
 
@@ -117,7 +116,6 @@ export class GameEngine implements IGame {
 		this.timer = timer;
 		this.max_score = settings.max_score;
 		this.eventBus = eventBus;
-		this.letters = lettersService;
 		this.dictionary = dictionary;
 		this.initialField = initialField;
 	}
@@ -358,8 +356,25 @@ export class GameEngine implements IGame {
 		return { changedWords: newWords };
 	};
 
-	public addLetter(payload: IAddLetter) {
+	private isActiveActor(actorId: UserId) {
+		return actorId === this.state.activePlayer && Boolean(this.state.players[actorId]);
+	}
+
+	public addLetter(actorId: UserId, payload: IAddLetter) {
+		if (!this.isActiveActor(actorId) || !this.playersHands[actorId]?.includes(payload.letterId)) {
+			return;
+		}
+
 		const { position, letterId } = payload;
+		const row = this.turnField[position.y];
+		if (
+			!row ||
+			position.x < 0 ||
+			position.x >= row.length ||
+			row[position.x] !== this.initialField[position.y][position.x]
+		) {
+			return;
+		}
 
 		this.turnField[position.y][position.x] = letterId;
 
@@ -374,7 +389,11 @@ export class GameEngine implements IGame {
 		this.eventBus.emit(EVENTS.UPDATE_TURN_FIELD, { field: this.turnField, sessions: this.sessions });
 	}
 
-	public removeLetter({ letterId }: IRemoveLetter) {
+	public removeLetter(actorId: UserId, { letterId }: IRemoveLetter) {
+		if (!this.isActiveActor(actorId) || !this.state.turn?.droppedLetters.includes(letterId)) {
+			return;
+		}
+
 		const droppedLetter = this.state.turn?.droppedLetters.indexOf(letterId);
 
 		if (typeof droppedLetter === 'number' && droppedLetter !== -1) {
@@ -445,10 +464,17 @@ export class GameEngine implements IGame {
 			droppedLetters: [],
 			words: [],
 		};
-	}
+	};
 
-	public changeLetters(letters: string[]) {
-		const playerLetters = this.state.players[this.state.activePlayer].letters;
+	public changeLetters(actorId: UserId, letters: string[]) {
+		if (!this.isActiveActor(actorId)) {
+			return;
+		}
+
+		const playerLetters = this.playersHands[actorId];
+		if (letters.length > playerLetters.length || letters.some((letter) => !playerLetters.includes(letter))) {
+			return;
+		}
 		const newLetters = this.letters.getRandomLetters(letters.length);
 
 		letters.forEach((letter, i) => {
@@ -457,10 +483,10 @@ export class GameEngine implements IGame {
 
 			if (typeof newLetter !== 'undefined') {
 				// replace for a new one
-				this.state.players[this.state.activePlayer].letters.splice(prevLetterIndex, 1, newLetter);
+				this.playersHands[actorId].splice(prevLetterIndex, 1, newLetter);
 			} else {
 				// just delete letter
-				this.state.players[this.state.activePlayer].letters.splice(prevLetterIndex, 1);
+				this.playersHands[actorId].splice(prevLetterIndex, 1);
 			}
 		});
 
@@ -493,28 +519,31 @@ export class GameEngine implements IGame {
 	private forceNextTurn = () => {
 		// Clear all field letters that were put during the current turn
 		this.turnField = structuredClone(this.state.field);
-		this.nextTurn();
-	}
+		this.advanceTurn();
+	};
 
-	public nextTurn() {
-		this.state.field = structuredClone(this.turnField); // does it have invalid words? if yes, then we need to reset the field to the previous state
+	private advanceTurn() {
+		// Reset the field when the current turn contains invalid words.
+		this.state.field = structuredClone(this.turnField);
 
-		const playerLetters = this.state.players[this.state.activePlayer].letters;
-		const letters =
+		const handLetters = this.playersHands[this.state.activePlayer];
+		const newHandLetters =
 			this.state.turn?.droppedLetters && this.letters.getRandomLetters(this.state.turn?.droppedLetters.length);
 		// mark new letters that were put out the stock
 		this.state.letters = this.letters.getLetters();
 
 		// give new letters for the current player
 		this.state.turn?.droppedLetters.forEach((dropppedLetter) => {
-			const dropppedPlayerLetter = playerLetters.indexOf(dropppedLetter);
+			const dropppedPlayerLetter = handLetters.indexOf(dropppedLetter);
 
-			const newLetter = letters && letters.pop();
+			const newLetter = newHandLetters?.pop();
 
 			if (newLetter) {
-				this.state.players[this.state.activePlayer].letters.splice(dropppedPlayerLetter, 1, newLetter);
+				this.playersHands[this.state.activePlayer].splice(dropppedPlayerLetter, 1, newLetter);
 			}
 		});
+
+		const prevActivePlayer = this.state.activePlayer;
 
 		// calculate new score for the current player
 		const score = this.state.turn?.words.reduce<number>((acc, word) => acc + (word.score ?? 0), 0);
@@ -523,11 +552,19 @@ export class GameEngine implements IGame {
 
 		// switch to the next player
 		const players = Object.keys(this.state.players);
-		const currentPlayerIndex = players.indexOf(this.state.activePlayer);
+		let currentPlayerIndex = players.indexOf(this.state.activePlayer);
+
+		console.log('------> current player index', currentPlayerIndex);
+
+		currentPlayerIndex++;
+
+		console.log('------> [INCREASED] current player index', currentPlayerIndex, players.length);
 
 		if (currentPlayerIndex === players.length) {
-			[this.state.activePlayer] = players;
+			currentPlayerIndex = 0;
 		}
+
+		this.state.activePlayer = players[currentPlayerIndex];
 
 		this.previousWords = this.state.turn?.words || [];
 
@@ -538,13 +575,23 @@ export class GameEngine implements IGame {
 
 		this.timer.stop();
 
-		// maybe need to emit UPDATE TURN FIELD?
+		console.log('------> current player', this.state.activePlayer);
+
+		this.eventBus.emit(EVENTS.UPDATE_HAND, {
+			hand: this.playersHands[prevActivePlayer],
+			sessions: [prevActivePlayer],
+		});
+		this.eventBus.emit(EVENTS.UPDATE_ACTIVE_PLAYER, {
+			activePlayer: this.state.activePlayer,
+			sessions: this.sessions,
+		});
 		this.eventBus.emit(EVENTS.UPDATE_PLAYERS, { players: this.state.players, sessions: this.sessions });
 		this.eventBus.emit(EVENTS.UPDATE_LETTERS, { letters: this.state.letters, sessions: this.sessions });
 		this.eventBus.emit(EVENTS.UPDATE_TURN_LETTERS, {
 			dropppedLetters: this.state.turn?.droppedLetters,
 			sessions: this.sessions,
 		});
+
 		this.eventBus.emit(EVENTS.UPDATE_TURN_WORDS, {
 			words: this.previousWords.map((word) => ({ ...word, isPrevious: true })),
 			sessions: this.sessions,
@@ -553,6 +600,12 @@ export class GameEngine implements IGame {
 		// set new timer
 		this.timer = new Timer(DEFAULT_TIMER_VALUE_SEC, this.onTimerTick, this.onTimerEnd);
 		this.timer.start();
+	}
+
+	public nextTurn(actorId: UserId) {
+		if (this.isActiveActor(actorId)) {
+			this.advanceTurn();
+		}
 	}
 
 	public onTimerTick = (time: number, total: number) => {
@@ -595,6 +648,10 @@ export class GameEngine implements IGame {
 		return this.state;
 	}
 
+	public getPlayerHand(userId: UserId) {
+		return this.playersHands[userId] || [];
+	}
+
 	public finish(player?: IPlayer) {
 		this.eventBus.emit(EVENTS.ON_FINISH_GAME, {
 			gameId: this.id,
@@ -607,13 +664,25 @@ export class GameEngine implements IGame {
 		return !(max_players === Object.keys(this.state.players).length);
 	}
 
-	public join(sessionId: string, user: ISpectator | IPlayer) {
-		if (user.role === ROLES.SPECTATOR) {
-			this.state.spectators.push(user);
-		} else {
-			this.state.players[user.id] = user;
+	private createPlayer(user: IUser): void {
+		this.playersHands[user.id] = this.letters.getRandomLetters(PLAYER_DEFAULT_LETTERS_COUNT);
+
+		this.state.players[user.id] = {
+			...user,
+			role: ROLES.PARTICIPANT,
+			score: 0,
+		};
+	}
+
+	public join(sessionId: string, user: IUser) {
+		if (this.state.players[user.id]) {
+			throw new Error(`Player with this id already exists in the game: ${user.id}`);
 		}
 
+		this.createPlayer(user);
+
 		this.sessions.push(sessionId);
+
+		this.eventBus.emit(EVENTS.UPDATE_PLAYERS, { players: this.state.players, sessions: this.sessions });
 	}
 }

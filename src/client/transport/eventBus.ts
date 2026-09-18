@@ -1,4 +1,3 @@
-import uuid4 from 'uuid4';
 import { io, Socket } from 'socket.io-client';
 
 export interface EventBusInstance {
@@ -10,34 +9,14 @@ export interface EventBusInstance {
 
 export class EventBus {
 	private socket?: Socket;
-	private sessionId?: string;
 	private connected: boolean = false;
 
-private initSessionId() {
-    this.sessionId = undefined;
-
-    let sessionId: string | undefined;
-
-    if (typeof window !== 'undefined' && window.localStorage) {
-        sessionId = window.localStorage.getItem('sessionId') || uuid4();
-        window.localStorage.setItem('sessionId', sessionId);
-    } else {
-        // Fallback for non-browser environments
-        sessionId = uuid4();
-    }
-
-    return sessionId;
-}
-
 	public connect() {
-		this.sessionId = this.initSessionId();
-
 		// @TODO: add connection url from config
-		this.socket = io('ws://127.0.0.1:8090', {
+		const host = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
+		this.socket = io(`http://${host}:8090`, {
 			autoConnect: false,
-			extraHeaders: {
-				'X-Session-Id': this.sessionId,
-			},
+			withCredentials: true,
 		});
 		this.socket?.connect();
 
@@ -53,6 +32,6 @@ private initSessionId() {
 	}
 
 	public emit(eventName: string, payload?: Record<string, any>) {
-		this.socket?.emit(eventName, { sessionId: this.sessionId, ...payload });
+		this.socket?.emit(eventName, payload);
 	}
 }

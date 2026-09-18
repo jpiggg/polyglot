@@ -1,30 +1,30 @@
 @use '../../theme' as *;
 
 .container {
-    display: flex;
-    max-width: $step * 100;
-    margin: 0 auto;
-    flex-direction: column;
-    gap: $step * 2;
-    text-align: center;
+	display: flex;
+	max-width: $step * 100;
+	margin: 0 auto;
+	flex-direction: column;
+	gap: $step * 2;
+	text-align: center;
 }
 
 .illustration {
-    width: $step * 50;
-    height: $step * 50;
-    margin: 0 auto;
+	width: $step * 50;
+	height: $step * 50;
+	margin: 0 auto;
 }
 
 .header {
-    @include font($variant: 'words');
+	@include font($variant: 'words');
 }
 
 .text {
-    &::before {
-        display: inline-block;
-        content: '';
-        width: 1em;
-        height: 1em;
-        background: url('./assets/book.svg') no-repeat;
-    }
+	&::before {
+		display: inline-block;
+		content: '';
+		width: 1em;
+		height: 1em;
+		background: url('./assets/book.svg') no-repeat;
+	}
 }

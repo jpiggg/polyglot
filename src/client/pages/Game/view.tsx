@@ -1,28 +1,40 @@
 import * as React from 'react';
 import { createPortal } from 'react-dom';
-import { DndContext, MouseSensor, useSensor, useSensors, DragEndEvent, DragStartEvent, UniqueIdentifier } from '@dnd-kit/core';
-import type { IGameState, UserId, IWord } from '../../../types';
+import {
+	DndContext,
+	MouseSensor,
+	useSensor,
+	useSensors,
+	DragEndEvent,
+	DragStartEvent,
+	UniqueIdentifier,
+} from '@dnd-kit/core';
+import type { IGameState } from '../../../types';
 import Sidebar from '../../components/Sidebar';
 import GameField from '../../components/GameField';
 import PlayerLetters from '../../components/PlayerLetters';
-import Button from '../../components/Button';
-import Input from '../../components/Input';
-
 
 export interface IProps {
 	classes: Record<string, string>;
 	game: IGameState | null;
-	userId: UserId;
+	currentUserId?: string;
 	fieldLetters: string[];
 	onNextTurn: () => void;
-	onJoinGame: (gameId: string) => void;
-	onCreateGame: () => void;
-	onAddLetter: (payload: { letterId: string, position: { x: number; y: number }, cellId: UniqueIdentifier }) => void;
+	onAddLetter: (payload: { letterId: string; position: { x: number; y: number }; cellId: UniqueIdentifier }) => void;
 	onRemoveLetter: (payload: { letterId: string }) => void;
 	onChangeLetters: (selectedLetters: string[]) => void;
 }
 
-function GamePage({ game, fieldLetters, onCreateGame, userId, classes, onAddLetter, onRemoveLetter, onNextTurn, onChangeLetters, onJoinGame }: IProps) {
+function GamePage({
+	game,
+	currentUserId = undefined,
+	fieldLetters,
+	classes,
+	onAddLetter,
+	onRemoveLetter,
+	onNextTurn,
+	onChangeLetters,
+}: IProps) {
 	const [selectedLetters, setSelectedLetters] = React.useState<string[]>([]);
 
 	const mouseSensor = useSensor(MouseSensor, {
@@ -33,7 +45,7 @@ function GamePage({ game, fieldLetters, onCreateGame, userId, classes, onAddLett
 
 	const handleChangeLetters = () => {
 		onChangeLetters(selectedLetters);
-	}
+	};
 
 	const sensors = useSensors(mouseSensor);
 
@@ -44,7 +56,6 @@ function GamePage({ game, fieldLetters, onCreateGame, userId, classes, onAddLett
 			setSelectedLetters((state) => {
 				const newState = [...state];
 				newState.splice(indexOf, 1);
-
 				return newState;
 			});
 		}
@@ -55,11 +66,6 @@ function GamePage({ game, fieldLetters, onCreateGame, userId, classes, onAddLett
 		const letter = game!.letters[letterId];
 
 		if (over) {
-			let prevPosition: { x: number; y: number };
-			if (letter.located.in === 'field') {
-				prevPosition = { ...letter.located.position };
-			}
-
 			const { position } = over.data.current as any;
 
 			letter.located = {
@@ -68,32 +74,35 @@ function GamePage({ game, fieldLetters, onCreateGame, userId, classes, onAddLett
 			};
 
 			if (fieldLetters.includes(letterId)) {
-				onRemoveLetter({letterId});
+				onRemoveLetter({ letterId });
 			}
 
 			onAddLetter({ letterId, position, cellId: over.id });
 		} else {
-			onRemoveLetter({letterId: active.id as string});
+			onRemoveLetter({ letterId: active.id as string });
 		}
 	};
 
 	if (!game) {
-		return (
-			// [DEBUG] this is for debug only
-			<div className={classes.container}>
-				<Button className={classes.item} onClick={onCreateGame}>New game</Button>
-				<span className={classes.item}>OR</span>
-				<Input className={classes.item} label='Join game' placeholder='Type game id here' onChange={onJoinGame} />
-			</div>
-		);
+		return <div className={classes.game}>Loading game...</div>;
 	}
+
+	console.log('----------> current user id', currentUserId, game.activePlayer);
 
 	return (
 		<div className={classes.game}>
 			<DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd} sensors={sensors}>
-				<GameField fieldLetters={fieldLetters} />
+				<GameField fieldLetters={fieldLetters} isLocked={currentUserId !== game.activePlayer} />
 				<Sidebar onNextTurn={onNextTurn} onChangeLetters={handleChangeLetters} />
-				{createPortal(<PlayerLetters selectedLetters={selectedLetters} setSelectedLetters={setSelectedLetters} fieldLetters={fieldLetters} onRemoveLetter={onRemoveLetter} />, document.body)}
+				{createPortal(
+					<PlayerLetters
+						selectedLetters={selectedLetters}
+						setSelectedLetters={setSelectedLetters}
+						fieldLetters={fieldLetters}
+						onRemoveLetter={onRemoveLetter}
+					/>,
+					document.body,
+				)}
 			</DndContext>
 		</div>
 	);

@@ -1,1176 +1,928 @@
 {
-    "activePlayer": "8cb8a9f8-bc7f-4f9e-af57-a212f1ceb870",
-    "players": {
-        "8cb8a9f8-bc7f-4f9e-af57-a212f1ceb870": {
-            "id": "8cb8a9f8-bc7f-4f9e-af57-a212f1ceb870",
-            "letters": [
-                "126",
-                "121",
-                "69",
-                "17",
-                "37",
-                "15",
-                "19"
-            ],
-            "role": "participant",
-            "score": 0
-        }
-    },
-    "spectators": [],
-    "letters": {
-        "0": {
-            "value": "А",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "1": {
-            "value": "А",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "2": {
-            "value": "А",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "3": {
-            "value": "А",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "4": {
-            "value": "А",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "5": {
-            "value": "А",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "6": {
-            "value": "А",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "7": {
-            "value": "А",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "8": {
-            "value": "А",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "9": {
-            "value": "А",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "10": {
-            "value": "Б",
-            "price": 3,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "11": {
-            "value": "Б",
-            "price": 3,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "12": {
-            "value": "Б",
-            "price": 3,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "13": {
-            "value": "В",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "14": {
-            "value": "В",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "15": {
-            "value": "В",
-            "price": 2,
-            "located": {
-                "in": "player"
-            }
-        },
-        "16": {
-            "value": "В",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "17": {
-            "value": "В",
-            "price": 2,
-            "located": {
-                "in": "player"
-            }
-        },
-        "18": {
-            "value": "Г",
-            "price": 3,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "19": {
-            "value": "Г",
-            "price": 3,
-            "located": {
-                "in": "player"
-            }
-        },
-        "20": {
-            "value": "Г",
-            "price": 3,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "21": {
-            "value": "Д",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "22": {
-            "value": "Д",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "23": {
-            "value": "Д",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "24": {
-            "value": "Д",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "25": {
-            "value": "Д",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "26": {
-            "value": "Е",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "27": {
-            "value": "Е",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "28": {
-            "value": "Е",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "29": {
-            "value": "Е",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "30": {
-            "value": "Е",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "31": {
-            "value": "Е",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "32": {
-            "value": "Е",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "33": {
-            "value": "Е",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "34": {
-            "value": "Е",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "35": {
-            "value": "Ж",
-            "price": 5,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "36": {
-            "value": "Ж",
-            "price": 5,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "37": {
-            "value": "З",
-            "price": 5,
-            "located": {
-                "in": "player"
-            }
-        },
-        "38": {
-            "value": "З",
-            "price": 5,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "39": {
-            "value": "И",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "40": {
-            "value": "И",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "41": {
-            "value": "И",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "42": {
-            "value": "И",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "43": {
-            "value": "И",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "44": {
-            "value": "И",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "45": {
-            "value": "И",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "46": {
-            "value": "И",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "47": {
-            "value": "Й",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "48": {
-            "value": "Й",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "49": {
-            "value": "Й",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "50": {
-            "value": "Й",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "51": {
-            "value": "К",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "52": {
-            "value": "К",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "53": {
-            "value": "К",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "54": {
-            "value": "К",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "55": {
-            "value": "К",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "56": {
-            "value": "К",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "57": {
-            "value": "Л",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "58": {
-            "value": "Л",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "59": {
-            "value": "Л",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "60": {
-            "value": "Л",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "61": {
-            "value": "М",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "62": {
-            "value": "М",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "63": {
-            "value": "М",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "64": {
-            "value": "М",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "65": {
-            "value": "М",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "66": {
-            "value": "Н",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "67": {
-            "value": "Н",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "68": {
-            "value": "Н",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "69": {
-            "value": "Н",
-            "price": 1,
-            "located": {
-                "in": "player"
-            }
-        },
-        "70": {
-            "value": "Н",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "71": {
-            "value": "Н",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "72": {
-            "value": "Н",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "73": {
-            "value": "Н",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "74": {
-            "value": "О",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "75": {
-            "value": "О",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "76": {
-            "value": "О",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "77": {
-            "value": "О",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "78": {
-            "value": "О",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "79": {
-            "value": "О",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "80": {
-            "value": "О",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "81": {
-            "value": "О",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "82": {
-            "value": "О",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "83": {
-            "value": "О",
-            "price": 1,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "84": {
-            "value": "П",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "85": {
-            "value": "П",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "86": {
-            "value": "П",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "87": {
-            "value": "П",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "88": {
-            "value": "П",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "89": {
-            "value": "П",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "90": {
-            "value": "Р",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "91": {
-            "value": "Р",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "92": {
-            "value": "Р",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "93": {
-            "value": "Р",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "94": {
-            "value": "Р",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "95": {
-            "value": "Р",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "96": {
-            "value": "С",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "97": {
-            "value": "С",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "98": {
-            "value": "С",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "99": {
-            "value": "С",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "100": {
-            "value": "С",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "101": {
-            "value": "С",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "102": {
-            "value": "Т",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "103": {
-            "value": "Т",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "104": {
-            "value": "Т",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "105": {
-            "value": "Т",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "106": {
-            "value": "Т",
-            "price": 2,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "107": {
-            "value": "У",
-            "price": 3,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "108": {
-            "value": "У",
-            "price": 3,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "109": {
-            "value": "У",
-            "price": 3,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "110": {
-            "value": "Ф",
-            "price": 10,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "111": {
-            "value": "Х",
-            "price": 5,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "112": {
-            "value": "Х",
-            "price": 5,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "113": {
-            "value": "Ц",
-            "price": 10,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "114": {
-            "value": "Ч",
-            "price": 5,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "115": {
-            "value": "Ч",
-            "price": 5,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "116": {
-            "value": "Ш",
-            "price": 10,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "117": {
-            "value": "Щ",
-            "price": 10,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "118": {
-            "value": "Ъ",
-            "price": 10,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "119": {
-            "value": "Ы",
-            "price": 10,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "120": {
-            "value": "Ы",
-            "price": 10,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "121": {
-            "value": "Ь",
-            "price": 5,
-            "located": {
-                "in": "player"
-            }
-        },
-        "122": {
-            "value": "Ь",
-            "price": 5,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "123": {
-            "value": "Э",
-            "price": 10,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "124": {
-            "value": "Ю",
-            "price": 10,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "125": {
-            "value": "Я",
-            "price": 3,
-            "located": {
-                "in": "stock"
-            }
-        },
-        "126": {
-            "value": "Я",
-            "price": 3,
-            "located": {
-                "in": "player"
-            }
-        },
-        "127": {
-            "value": "Я",
-            "price": 3,
-            "located": {
-                "in": "stock"
-            }
-        }
-    },
-    "field": [
-        [
-            "w3",
-            null,
-            null,
-            "l2",
-            null,
-            null,
-            null,
-            "w3",
-            null,
-            null,
-            null,
-            "l2",
-            null,
-            null,
-            "w3"
-        ],
-        [
-            null,
-            "w2",
-            null,
-            null,
-            null,
-            "l3",
-            null,
-            null,
-            null,
-            "l3",
-            null,
-            null,
-            null,
-            "w2",
-            null
-        ],
-        [
-            null,
-            null,
-            "w2",
-            null,
-            null,
-            null,
-            "l2",
-            null,
-            "l2",
-            null,
-            null,
-            null,
-            "w2",
-            null,
-            null
-        ],
-        [
-            "l2",
-            null,
-            null,
-            "w2",
-            null,
-            null,
-            null,
-            "l2",
-            null,
-            null,
-            null,
-            "w2",
-            null,
-            null,
-            "l2"
-        ],
-        [
-            null,
-            null,
-            null,
-            null,
-            "w2",
-            null,
-            null,
-            null,
-            null,
-            null,
-            "w2",
-            null,
-            null,
-            null,
-            null
-        ],
-        [
-            null,
-            "l3",
-            null,
-            null,
-            null,
-            "l3",
-            null,
-            null,
-            null,
-            "l3",
-            null,
-            null,
-            null,
-            "l3",
-            null
-        ],
-        [
-            null,
-            null,
-            "l2",
-            null,
-            null,
-            null,
-            "l2",
-            null,
-            "l2",
-            null,
-            null,
-            null,
-            "l2",
-            null,
-            null
-        ],
-        [
-            "w3",
-            null,
-            null,
-            "l2",
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            "l2",
-            null,
-            null,
-            "w3"
-        ],
-        [
-            null,
-            null,
-            "l2",
-            null,
-            null,
-            null,
-            "l2",
-            null,
-            null,
-            null,
-            null,
-            null,
-            "l2",
-            null,
-            null
-        ],
-        [
-            null,
-            "l3",
-            null,
-            null,
-            null,
-            "l3",
-            null,
-            null,
-            null,
-            "l3",
-            null,
-            null,
-            null,
-            "l3",
-            null
-        ],
-        [
-            null,
-            null,
-            null,
-            null,
-            "w2",
-            null,
-            null,
-            null,
-            null,
-            null,
-            "w2",
-            null,
-            null,
-            null,
-            null
-        ],
-        [
-            "l2",
-            null,
-            null,
-            "w2",
-            null,
-            null,
-            null,
-            "l2",
-            null,
-            null,
-            null,
-            "w2",
-            null,
-            null,
-            "l2"
-        ],
-        [
-            null,
-            null,
-            "w2",
-            null,
-            null,
-            null,
-            "l2",
-            null,
-            "l2",
-            null,
-            null,
-            null,
-            "w2",
-            null,
-            null
-        ],
-        [
-            null,
-            "w2",
-            null,
-            null,
-            null,
-            "l3",
-            null,
-            null,
-            null,
-            "l3",
-            null,
-            null,
-            null,
-            "w2",
-            null
-        ],
-        [
-            "w3",
-            null,
-            null,
-            "l2",
-            null,
-            null,
-            null,
-            "w3",
-            null,
-            null,
-            null,
-            "l2",
-            null,
-            null,
-            "w3"
-        ]
-    ],
-    "timer": {}
+	"activePlayer": "8cb8a9f8-bc7f-4f9e-af57-a212f1ceb870",
+	"players": {
+		"8cb8a9f8-bc7f-4f9e-af57-a212f1ceb870": {
+			"id": "8cb8a9f8-bc7f-4f9e-af57-a212f1ceb870",
+			"letters": ["126", "121", "69", "17", "37", "15", "19"],
+			"role": "participant",
+			"score": 0
+		}
+	},
+	"spectators": [],
+	"letters": {
+		"0": {
+			"value": "А",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"1": {
+			"value": "А",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"2": {
+			"value": "А",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"3": {
+			"value": "А",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"4": {
+			"value": "А",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"5": {
+			"value": "А",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"6": {
+			"value": "А",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"7": {
+			"value": "А",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"8": {
+			"value": "А",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"9": {
+			"value": "А",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"10": {
+			"value": "Б",
+			"price": 3,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"11": {
+			"value": "Б",
+			"price": 3,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"12": {
+			"value": "Б",
+			"price": 3,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"13": {
+			"value": "В",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"14": {
+			"value": "В",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"15": {
+			"value": "В",
+			"price": 2,
+			"located": {
+				"in": "player"
+			}
+		},
+		"16": {
+			"value": "В",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"17": {
+			"value": "В",
+			"price": 2,
+			"located": {
+				"in": "player"
+			}
+		},
+		"18": {
+			"value": "Г",
+			"price": 3,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"19": {
+			"value": "Г",
+			"price": 3,
+			"located": {
+				"in": "player"
+			}
+		},
+		"20": {
+			"value": "Г",
+			"price": 3,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"21": {
+			"value": "Д",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"22": {
+			"value": "Д",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"23": {
+			"value": "Д",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"24": {
+			"value": "Д",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"25": {
+			"value": "Д",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"26": {
+			"value": "Е",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"27": {
+			"value": "Е",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"28": {
+			"value": "Е",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"29": {
+			"value": "Е",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"30": {
+			"value": "Е",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"31": {
+			"value": "Е",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"32": {
+			"value": "Е",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"33": {
+			"value": "Е",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"34": {
+			"value": "Е",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"35": {
+			"value": "Ж",
+			"price": 5,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"36": {
+			"value": "Ж",
+			"price": 5,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"37": {
+			"value": "З",
+			"price": 5,
+			"located": {
+				"in": "player"
+			}
+		},
+		"38": {
+			"value": "З",
+			"price": 5,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"39": {
+			"value": "И",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"40": {
+			"value": "И",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"41": {
+			"value": "И",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"42": {
+			"value": "И",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"43": {
+			"value": "И",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"44": {
+			"value": "И",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"45": {
+			"value": "И",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"46": {
+			"value": "И",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"47": {
+			"value": "Й",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"48": {
+			"value": "Й",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"49": {
+			"value": "Й",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"50": {
+			"value": "Й",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"51": {
+			"value": "К",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"52": {
+			"value": "К",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"53": {
+			"value": "К",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"54": {
+			"value": "К",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"55": {
+			"value": "К",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"56": {
+			"value": "К",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"57": {
+			"value": "Л",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"58": {
+			"value": "Л",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"59": {
+			"value": "Л",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"60": {
+			"value": "Л",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"61": {
+			"value": "М",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"62": {
+			"value": "М",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"63": {
+			"value": "М",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"64": {
+			"value": "М",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"65": {
+			"value": "М",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"66": {
+			"value": "Н",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"67": {
+			"value": "Н",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"68": {
+			"value": "Н",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"69": {
+			"value": "Н",
+			"price": 1,
+			"located": {
+				"in": "player"
+			}
+		},
+		"70": {
+			"value": "Н",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"71": {
+			"value": "Н",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"72": {
+			"value": "Н",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"73": {
+			"value": "Н",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"74": {
+			"value": "О",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"75": {
+			"value": "О",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"76": {
+			"value": "О",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"77": {
+			"value": "О",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"78": {
+			"value": "О",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"79": {
+			"value": "О",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"80": {
+			"value": "О",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"81": {
+			"value": "О",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"82": {
+			"value": "О",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"83": {
+			"value": "О",
+			"price": 1,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"84": {
+			"value": "П",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"85": {
+			"value": "П",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"86": {
+			"value": "П",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"87": {
+			"value": "П",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"88": {
+			"value": "П",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"89": {
+			"value": "П",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"90": {
+			"value": "Р",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"91": {
+			"value": "Р",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"92": {
+			"value": "Р",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"93": {
+			"value": "Р",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"94": {
+			"value": "Р",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"95": {
+			"value": "Р",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"96": {
+			"value": "С",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"97": {
+			"value": "С",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"98": {
+			"value": "С",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"99": {
+			"value": "С",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"100": {
+			"value": "С",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"101": {
+			"value": "С",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"102": {
+			"value": "Т",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"103": {
+			"value": "Т",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"104": {
+			"value": "Т",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"105": {
+			"value": "Т",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"106": {
+			"value": "Т",
+			"price": 2,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"107": {
+			"value": "У",
+			"price": 3,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"108": {
+			"value": "У",
+			"price": 3,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"109": {
+			"value": "У",
+			"price": 3,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"110": {
+			"value": "Ф",
+			"price": 10,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"111": {
+			"value": "Х",
+			"price": 5,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"112": {
+			"value": "Х",
+			"price": 5,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"113": {
+			"value": "Ц",
+			"price": 10,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"114": {
+			"value": "Ч",
+			"price": 5,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"115": {
+			"value": "Ч",
+			"price": 5,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"116": {
+			"value": "Ш",
+			"price": 10,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"117": {
+			"value": "Щ",
+			"price": 10,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"118": {
+			"value": "Ъ",
+			"price": 10,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"119": {
+			"value": "Ы",
+			"price": 10,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"120": {
+			"value": "Ы",
+			"price": 10,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"121": {
+			"value": "Ь",
+			"price": 5,
+			"located": {
+				"in": "player"
+			}
+		},
+		"122": {
+			"value": "Ь",
+			"price": 5,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"123": {
+			"value": "Э",
+			"price": 10,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"124": {
+			"value": "Ю",
+			"price": 10,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"125": {
+			"value": "Я",
+			"price": 3,
+			"located": {
+				"in": "stock"
+			}
+		},
+		"126": {
+			"value": "Я",
+			"price": 3,
+			"located": {
+				"in": "player"
+			}
+		},
+		"127": {
+			"value": "Я",
+			"price": 3,
+			"located": {
+				"in": "stock"
+			}
+		}
+	},
+	"field": [
+		["w3", null, null, "l2", null, null, null, "w3", null, null, null, "l2", null, null, "w3"],
+		[null, "w2", null, null, null, "l3", null, null, null, "l3", null, null, null, "w2", null],
+		[null, null, "w2", null, null, null, "l2", null, "l2", null, null, null, "w2", null, null],
+		["l2", null, null, "w2", null, null, null, "l2", null, null, null, "w2", null, null, "l2"],
+		[null, null, null, null, "w2", null, null, null, null, null, "w2", null, null, null, null],
+		[null, "l3", null, null, null, "l3", null, null, null, "l3", null, null, null, "l3", null],
+		[null, null, "l2", null, null, null, "l2", null, "l2", null, null, null, "l2", null, null],
+		["w3", null, null, "l2", null, null, null, null, null, null, null, "l2", null, null, "w3"],
+		[null, null, "l2", null, null, null, "l2", null, null, null, null, null, "l2", null, null],
+		[null, "l3", null, null, null, "l3", null, null, null, "l3", null, null, null, "l3", null],
+		[null, null, null, null, "w2", null, null, null, null, null, "w2", null, null, null, null],
+		["l2", null, null, "w2", null, null, null, "l2", null, null, null, "w2", null, null, "l2"],
+		[null, null, "w2", null, null, null, "l2", null, "l2", null, null, null, "w2", null, null],
+		[null, "w2", null, null, null, "l3", null, null, null, "l3", null, null, null, "w2", null],
+		["w3", null, null, "l2", null, null, null, "w3", null, null, null, "l2", null, null, "w3"]
+	],
+	"timer": {}
 }

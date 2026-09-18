@@ -1,38 +1,62 @@
 import type { Request, Response, NextFunction } from 'express';
+import fs from 'node:fs';
 import path from 'node:path';
 
-function pageMeta (_req: Request, res: Response, next: NextFunction) {
-    const manifest = eval('require("../client/manifest.json")');
-    const title = 'Document';
+type ManifestEntry = {
+	initial?: {
+		js?: string[];
+		css?: string[];
+	};
+};
 
-    const assets: Record<string, string[]> = {
-        scripts: [],
-        styles: [],
-        rest: [],
-    };
+type AssetManifest = {
+	entries?: Record<string, ManifestEntry>;
+	[key: string]: string | string[] | Record<string, ManifestEntry> | undefined;
+};
 
-    Object.keys(manifest).forEach(entry => {
-        const ext = path.extname(entry);
-        const assetPath = manifest[entry];
+function getManifestAssets(manifest: AssetManifest) {
+	const assets = manifest.entries
+		? Object.values(manifest.entries).flatMap((entry) => [
+				...(entry.initial?.js ?? []),
+				...(entry.initial?.css ?? []),
+			])
+		: Object.values(manifest).filter((asset): asset is string => typeof asset === 'string');
 
-        switch(ext) {
-        case '.js':
-            assets.scripts.push(assetPath);
-            break;
-        case '.css':
-            assets.styles.push(assetPath);
-            break;
-        default:
-            assets.rest.push(assetPath);
-        }
-    })
+	return assets.filter((assetPath) => !assetPath.includes('.hot-update.'));
+}
 
-    res.locals = {
-		title,
-        assets,
+function pageMeta(_req: Request, res: Response, next: NextFunction) {
+	const manifestPath = path.resolve(__dirname, '../client/manifest.json');
+	const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as AssetManifest;
+	const title = 'Document';
+	const assetPrefix = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : '';
+
+	const assets: Record<string, string[]> = {
+		scripts: [],
+		styles: [],
+		rest: [],
 	};
 
-    next();
+	getManifestAssets(manifest).forEach((assetPath) => {
+		const resolvedAssetPath = `${assetPrefix}${assetPath}`;
+		const ext = path.extname(resolvedAssetPath);
+
+		switch (ext) {
+			case '.js':
+				assets.scripts.push(resolvedAssetPath);
+				break;
+			case '.css':
+				assets.styles.push(resolvedAssetPath);
+				break;
+			default:
+				assets.rest.push(resolvedAssetPath);
+		}
+	});
+
+	res.locals.title = title;
+	res.locals.assets = assets;
+
+	next();
 }
 
 export default pageMeta;
